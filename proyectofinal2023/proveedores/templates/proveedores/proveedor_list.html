@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Proveedores
+{% endblock %}
+
+{% block contenido %}
+<br>
+<h1>Lista De Proveedores</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>RFC</th>
+            <th>Razon Social</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Municipio</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for proveedor in object_list %}
+        <tr>
+            <!-- <td>{{ proveedor.id }}</td> -->
+            <td>{{ proveedor.rfc }}</td>
+            <td>{{ proveedor.razon_social}}</td>
+            <td>{{ proveedor.direccion}}</td>
+            <td>{{ proveedor.telefono}}</td>
+            <td>{{ proveedor.correo}}</td>
+            <td>{{ proveedor.municipio.nombre}}</td>
+            <td>{{ proveedor.estado.nombre}}</td>
+            <td>
+                <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
