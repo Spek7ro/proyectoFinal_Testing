@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Eliminar cuenta
+{% endblock %}
+
+{% block contenido %}
+<h1>Eliminar cuenta</h1>
+<form method="POST" class="form">
+    {% csrf_token %}
+    <p>¿Estas Seguro de querer eliminar la cuenta con id "{{ object.id }}"?</p>
+    {{ form }}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'lista_cuentas' %}" class="btn btn-warning">Cancelar</a>
+</form>
+{% endblock %}

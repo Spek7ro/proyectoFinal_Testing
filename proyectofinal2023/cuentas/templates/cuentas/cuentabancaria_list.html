@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Cuentas Bancarias
+{% endblock %}
+
+{% block contenido %}
+<br>
+<h1>Lista De Cuentas Bancarias</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th><input type="checkbox" name="todos"></th>
+            <th>ID</th>
+            <th>Proyecto</th>
+            <th>Responsable</th>
+            <th>Limite presuestario</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cuenta in object_list %}
+        <tr>
+            <td><input type="checkbox" name="{{ cuenta.id }}"></td>
+            <td>{{ cuenta.id }}</td>
+            <td>{{ cuenta.proyecto }}</td>
+            <td>{{ cuenta.responsable }}</td>
+            <td>{{ cuenta.limite_presupuestario }}</td>
+            <td>
+                <a href="{% url 'eliminar_cuenta' cuenta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                <a href="{% url 'editar_cuenta' cuenta.id %}" class="btn btn-success btn-sm">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
