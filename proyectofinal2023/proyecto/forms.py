@@ -26,6 +26,8 @@ class FormProyecto(forms.ModelForm):
             'Responsables': forms.TextInput(
             attrs={'class':'form-class', 'placeholder':'Responsables'}
             ),
+            'Proveedor': forms.Select(
+            attrs= {'class':'form-control'}),
         }
 
 
@@ -33,4 +35,4 @@ class FormProyectoEditar(FormProyecto):
     
     class Meta:
         model = Proyecto
-        fields = '__all__'
+        exclude = ['num_proyecto']

@@ -13,15 +13,15 @@ class NuevoProyecto(CreateView):
     model = Proyecto
     form_class = FormProyecto
     extra_context = {'accion': 'Nuevo'}
-    success_url = reverse_lazy('lista_Proyectos')
+    success_url = reverse_lazy('lista_proyectos')
 
 class EliminarProyecto(DeleteView):
     model = Proyecto
-    success_url = reverse_lazy('lista_Proyectos') 
+    success_url = reverse_lazy('lista_proyectos') 
 
 class EditarProyecto(UpdateView):
     model = Proyecto
     form_class = FormProyectoEditar
     extra_context = {'accion': 'Editar'}
-    success_url = reverse_lazy('lista_Proyectos')
+    success_url = reverse_lazy('lista_proyectos')
 
