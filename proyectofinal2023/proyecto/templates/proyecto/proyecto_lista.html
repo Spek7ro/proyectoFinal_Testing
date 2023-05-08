@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Proyectos
+{% endblock %}
+
+{% block contenido %}
+<br>
+<h1>Lista De Proyectos</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>NUM Proyecto</th>
+            <th>Nombre Proyecto</th>
+            <th>Objetivo</th>
+            <th>Presupuesto</th>
+            <th>Duracion</th>
+            <th>Responsables</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for Proyecto in object_list %}
+        <tr>
+            <!-- <td>{{ Proyecto.id }}</td> -->
+            <td>{{ Proyecto.num_Proyecto }}</td>
+            <td>{{ Proyecto.nombre_proyecto}}</td>
+            <td>{{ Proyecto.objetivo}}</td>
+            <td>{{ Proyecto.presupuesto}}</td>
+            <td>{{ Proyecto.duracion}}</td>
+            <td>{{ Proyecto.responsables}}</td>
+            <td>
+                <a href="{% url 'eliminar_Proyecto' Proyecto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                <a href="{% url 'editar_Proyecto' Proyecto.id %}" class="btn btn-success btn-sm">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
