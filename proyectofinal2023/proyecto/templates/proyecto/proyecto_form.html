@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ accion }} Cuenta bancaria
+    {{ accion }} Proyecto
 {% endblock %}
 
 {% block contenido %}
-<h1>{{ accion }} Cuenta bancaria</h1>
+<h1>{{ accion }} Proyecto</h1>
 <form method="POST" class="form">
     {% csrf_token %}
     {{ form.as_p }}
@@ -16,8 +16,6 @@
             Guardar
         {% endif %}        
     </button>
-    <a href="{% url 'lista_cuentas' %}" class="btn btn-danger">Regresar</a>
+    <a href="{% url 'lista_proyectos' %}" class="btn btn-danger">Regresar</a>
 </form>
 {% endblock %}
-
-
