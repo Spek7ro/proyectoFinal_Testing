@@ -19,6 +19,18 @@ class NuevoProveedor(CreateView):
 class EliminarProveedor(DeleteView):
     model = Proveedor
     success_url = reverse_lazy('lista_proveedores') 
+    
+def eliminar_todos(request):
+    if request.method == 'POST':
+        for id in request.POST:
+            if id == "csrfmiddlewaretoken":
+                continue
+            elif id == "todas":
+                Proveedor.objects.all().delete()
+                return redirect('lista_proveedores')
+            Proveedor.objects.get(id=id).delete()
+    
+    return redirect('lista_proveedores')
 
 class EditarProveedor(UpdateView):
     model = Proveedor

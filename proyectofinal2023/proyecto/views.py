@@ -18,6 +18,18 @@ class NuevoProyecto(CreateView):
 class EliminarProyecto(DeleteView):
     model = Proyecto
     success_url = reverse_lazy('lista_proyectos') 
+    
+def eliminar_todos(request):
+    if request.method == 'POST':
+        for id in request.POST:
+            if id == "csrfmiddlewaretoken":
+                continue
+            elif id == "todos":
+                Proyecto.objects.all().delete()
+                return redirect('lista_proyectos')
+            Proyecto.objects.get(id=id).delete()
+    
+    return redirect('lista_proyectos')
 
 class EditarProyecto(UpdateView):
     model = Proyecto
