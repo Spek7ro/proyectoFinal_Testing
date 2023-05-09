@@ -37,6 +37,7 @@ Lista de Cuentas Bancarias
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Eliminar</button>
+        <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
     </form> 
 {% endblock %}
