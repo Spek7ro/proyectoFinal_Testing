@@ -64,7 +64,8 @@
 
                 {% else %}
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Iniciar Sesión</a>
+                    <a class="dropdown-item" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+                    <a class="dropdown-item" href="{% url 'Autenticacion' %}">Registrarse</a>
                   </div>
                 {% endif %}
 
