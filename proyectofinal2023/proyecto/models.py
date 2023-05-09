@@ -9,7 +9,7 @@ class Proyecto(models.Model):
     duracion = models.DecimalField(max_digits=78, decimal_places=2)
     responsables = models.CharField(max_length=200)
     proveedor = models.ForeignKey("proveedores.Proveedor", \
-        verbose_name='Proveedor', on_delete=models.DO_NOTHING)
+        verbose_name='Proveedor', on_delete=models.CASCADE)
     
     def __str__(slef):
         return slef.nombre_proyecto
