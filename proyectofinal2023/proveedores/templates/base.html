@@ -56,9 +56,22 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{user}}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Cerrar Sesión</a>
-                </div>
+                
+                {% if user.is_authenticated %}
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+                  </div>
+
+                {% else %}
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+                    <a class="dropdown-item" href="{% url 'Autenticacion' %}">Registrarse</a>
+                  </div>
+                {% endif %}
+
+                
+                  
+                
               </li>
           </ul>
         </div>
