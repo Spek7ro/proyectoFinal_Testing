@@ -18,6 +18,18 @@ class NuevaCuentaBancaria(CreateView):
 class EliminarCuentaBancaria(DeleteView):
     model = CuentaBancaria
     success_url = reverse_lazy('lista_cuentas') 
+    
+def eliminar_todas(request):
+    if request.method == 'POST':
+        for id in request.POST:
+            if id == "csrfmiddlewaretoken":
+                continue
+            elif id == "todas":
+                CuentaBancaria.objects.all().delete()
+                return redirect('lista_cuentas')
+            CuentaBancaria.objects.get(id=id).delete()
+    
+    return redirect('lista_cuentas')
 
 class EditarCuentaBancaria(UpdateView):
     model = CuentaBancaria
