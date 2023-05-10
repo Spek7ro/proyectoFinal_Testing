@@ -8,25 +8,25 @@ class FormProveedor(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'RFC': forms.TextInput(
+            'rfc': forms.TextInput(
             attrs={'class':'form-class','placeholder':'RFC'}
             ),
-            'Razon Social': forms.TextInput(
+            'razon_social': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Razon Social'}
             ),
-            'Direccion': forms.TextInput(
+            'direccion': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Dirección'}
             ),
-            'Telefono': forms.NumberInput(
+            'telefono': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'Telefono'}
             ),
-            'Correo': forms.TextInput(
+            'correo': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Correo'}
             ),
-            'Estado': forms.Select(
-            attrs={'class':'form-class', 'placeholder':'Correo'}
+            'estado': forms.Select(
+            attrs={'class':'form-class', 'placeholder':'Estado'}
             ),
-            'Municipio': forms.Select(
+            'municipio': forms.Select(
             attrs={'class':'form-class', 'placeholder':'Municipio'}
             ),
         }
@@ -37,3 +37,11 @@ class FormProveedorEditar(FormProveedor):
     class Meta:
         model = Proveedor
         fields = '__all__'
+        
+class FiltrosProveedor(FormProveedor):
+    
+    def __init__(self, *args, **kwargs):
+        super(FiltrosProveedor, self).__init__(*args, **kwargs)
+        
+        for field in self.fields:
+            self.fields[field].required = False

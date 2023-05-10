@@ -8,14 +8,14 @@ class FormCuentaBancaria(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'Proyecto': forms.TextInput(
-            attrs={'class':'form-class','placeholder':'Proyecto'}
+            'proyecto': forms.TextInput(
+                attrs={'class':'form-class','placeholder':'Proyecto'}
             ),
-            'Responsable': forms.TextInput(
-            attrs={'class':'form-class','placeholder':'Responsable'}
+            'responsable': forms.TextInput(
+                attrs={'class':'form-class','placeholder':'Responsable'}
             ),
-            'Limite presupuestario': forms.TextInput(
-            attrs={'class':'form-class','placeholder':'Limite presupuestario'}
+            'limite_presupuestario': forms.TextInput(
+                attrs={'class':'form-class','placeholder':'Limite presupuestario'}
             ),
         }
 
@@ -24,3 +24,11 @@ class FormCuentaBancariaEditar(FormCuentaBancaria):
     class Meta:
         model = CuentaBancaria
         fields = '__all__'
+        
+class FiltrosCuenta(FormCuentaBancaria):
+    
+    def __init__(self, *args, **kwargs):
+        super(FiltrosCuenta, self).__init__(*args, **kwargs)
+        
+        for field in self.fields:
+            self.fields[field].required = False

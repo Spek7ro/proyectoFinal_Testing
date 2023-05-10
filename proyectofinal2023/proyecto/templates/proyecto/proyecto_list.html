@@ -7,6 +7,25 @@ Lista de Proyectos
 {% block contenido %}
 <br>
 <h1>Lista De Proyectos</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<form action="{% url 'buscar_proyectos' %}" method="post" id="form">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <td>{{form.num_proyecto}}</td>
+            <td>{{form.nombre_proyecto}}</td>
+            <td>{{form.objetivo}}</td>
+            <td>{{form.presupuesto}}</td>
+            <td>{{form.duracion}}</td>
+            <td>{{form.responsables}}</td>
+            <td>{{form.proveedor}}</td>            
+            <td>
+                <input class="btn btn-success" type="submit" value="Buscar">
+                <input type="hidden" name="page" id="page">
+            </td>
+        </tr>
+    </table>
+</form>
 <table class="table">
     <thead>
         <form action="{% url 'eliminar_todos' %}" method="post">

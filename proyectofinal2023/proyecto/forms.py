@@ -8,25 +8,25 @@ class FormProyecto(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'NUM Proyecto': forms.NumberInput(
+            'num_proyecto': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'NUM Proyecto'}
             ),
-            'Nombre Proyecto': forms.TextInput(
+            'nombre_proyecto': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Nombre Proyecto'}
             ),
-            'Objetivo': forms.TextInput(
+            'objetivo': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Objetivo'}
             ),
-            'Presupuesto': forms.NumberInput(
+            'presupuesto': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'Presupuesto'}
             ),
-            'Duracion': forms.NumberInput(
+            'duracion': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'Duracion'}
             ),
-            'Responsables': forms.TextInput(
+            'responsables': forms.TextInput(
             attrs={'class':'form-class', 'placeholder':'Responsables'}
             ),
-            'Proveedor': forms.Select(
+            'proveedor': forms.Select(
             attrs= {'class':'form-control'}),
         }
 
@@ -36,3 +36,11 @@ class FormProyectoEditar(FormProyecto):
     class Meta:
         model = Proyecto
         exclude = ['num_proyecto']
+        
+class FiltrosProyecto(FormProyecto):
+    
+    def __init__(self, *args, **kwargs):
+        super(FiltrosProyecto, self).__init__(*args, **kwargs)
+        
+        for field in self.fields:
+            self.fields[field].required = False

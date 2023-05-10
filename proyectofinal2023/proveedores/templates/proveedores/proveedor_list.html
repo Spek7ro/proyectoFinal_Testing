@@ -7,6 +7,24 @@ Lista de Proveedores
 {% block contenido %}
 <br>
 <h1>Lista De Proveedores</h1>
+<form action="{% url 'buscar_proveedor' %}" method="post" id="form">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <td>{{form.rfc}}</td>
+            <td>{{form.razon_social}}</td>
+            <td>{{form.direccion}}</td>
+            <td>{{form.telefono}}</td>
+            <td>{{form.correo}}</td>
+            <td>{{form.municipio}}</td>
+            <td>{{form.estado}}</td>            
+            <td>
+                <input class="btn btn-success" type="submit" value="Buscar">
+                <input type="hidden" name="page" id="page">
+            </td>
+        </tr>
+    </table>
+</form>
 <table class="table">
         <thead>
             <form action="{% url 'eliminar_todos' %}" method="post">
@@ -44,7 +62,7 @@ Lista de Proveedores
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+    <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
     </form>
 {% endblock %}

@@ -7,6 +7,22 @@ Lista de Cuentas Bancarias
 {% block contenido %}
 <br>
 <h1>Lista De Cuentas Bancarias</h1>
+<form action="{% url 'buscar_cuenta' %}" method="post" id="form">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <td>{{form.proyecto}}</td>
+            <td>{{form.responsable}}</td>
+            <td>{{form.limite_presupuestario}}</td>
+            
+            <td>
+                <input class="btn btn-success" type="submit" value="Buscar">
+                <input type="hidden" name="page" id="page">
+            </td>
+        </tr>
+    </table>
+    
+</form>
 <table class="table">
     <thead>
         <form action="{% url 'eliminar_todas' %}" method="post">
