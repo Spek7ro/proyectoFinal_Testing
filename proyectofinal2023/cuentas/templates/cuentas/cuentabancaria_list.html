@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Lista de Cuentas Bancarias
 {% endblock %}
 
 {% block contenido %}
+<<<<<<< HEAD
 <br>
 <h1>Lista De Cuentas Bancarias</h1>
 <form action="{% url 'buscar_cuenta' %}" method="post" id="form">
@@ -39,6 +41,33 @@ Lista de Cuentas Bancarias
         </thead>
         <tbody>
                 {% for cuenta in object_list %}
+=======
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Lista de Cuentas Bancarias</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <form action="{% url 'eliminar_todas' %}" method="post">
+                        {% csrf_token %}
+            
+                        <tr>
+                            <th><input type="checkbox" name="todas">Todas</th>
+                            <th>ID</th>
+                            <th>Proyecto</th>
+                            <th>Responsable</th>
+                            <th>Limite presuestario</th>
+                            <th>Acciones</th>
+                        </tr>
+                        <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form> 
+                </thead>
+                <tbody>
+                    {% for cuenta in object_list %}
+>>>>>>> 2507912439b80f0123b931d3ddfc7d06a083d2d7
                     <tr>
                         <td><input type="checkbox" name="{{cuenta.id}}"></td>
                         <td>{{ cuenta.id }}</td>
@@ -50,10 +79,16 @@ Lista de Cuentas Bancarias
                             <a href="{% url 'editar_cuenta' cuenta.id %}" class="btn btn-success btn-sm">Editar</a>
                         </td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-    </form> 
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/datatables-demo.js' %}"></script>
 {% endblock %}
