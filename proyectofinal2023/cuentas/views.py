@@ -44,24 +44,26 @@ class Bienvenida(TemplateView):
     template_name = 'home.html'
 
 def buscar_cuenta(request):
-    cuentas = CuentaBancaria.objects.all().order_by('id','responsable')
+    cuentas = CuentaBancaria.objects.all().order_by('idcuenta','responsable')
     
     if request.method == 'POST':
         
         form = FiltrosCuenta(request.POST)
+        idcuenta = request.POST.get('idcuenta',None)
         proyecto = request.POST.get('proyecto',None)
         responsable = request.POST.get('responsable',None)
         limite_presupuestario = request.POST.get('limite_presupuestario',None)
-        
+        if idcuenta:
+            cuentas = cuentas.filter(idcuenta__contains=idcuenta)
         if proyecto:
             # cuentas = cuentas.filter(proyecto__startswith=proyecto)
-            cuentas = cuentas.filter(proyecto__contains=proyecto)
-            cuentas = cuentas.filter(proyecto__icontains=proyecto)
-            # cuentas = cuentas.get(proyecto=proyecto)
+            #cuentas = cuentas.filter(proyecto__contains=proyecto)
+            #cuentas = cuentas.filter(proyecto__icontains=proyecto)
+            cuentas = cuentas.get(proyecto__contains=proyecto)
         if responsable:
-            cuentas = cuentas.filter(responsable=responsable)
+            cuentas = cuentas.filter(responsable__contains=responsable)
         if limite_presupuestario:
-            cuentas = cuentas.filter(limite_presupuestario=limite_presupuestario)
+            cuentas = cuentas.filter(limite_presupuestario__contains=limite_presupuestario)
         
             
         print(cuentas.query)
