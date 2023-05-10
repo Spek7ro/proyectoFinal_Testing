@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-<style>
-    h1 { display: inline-block; }
-</style>
+
 {% block title %}
-    Lista de Cuentas Bancarias
+Lista de Cuentas Bancarias
 {% endblock %}
 
 {% block contenido %}
-
-<h1 >Lista De Cuentas Bancarias</h1>
-
 <form action="{% url 'buscar_cuenta' %}" method="post" id="form">
     {% csrf_token %}
     <table class="table">
@@ -25,22 +20,28 @@
             </td>
         </tr>
     </table>
-    
 </form>
-<form action="{% url 'eliminar_todas' %}" method="post">
-    {% csrf_token %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" name="todas">Todas</th>
-                    <th>ID</th>
-                    <th>Proyecto</th>
-                    <th>Responsable</th>
-                    <th>Limite presuestario</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cuenta in object_list %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Lista de Cuentas Bancarias</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <form action="{% url 'eliminar_todos' %}" method="post">
+                        {% csrf_token %}
+                        <tr>
+                            <th><input type="checkbox" name="todas">Todas</th>
+                            <th>ID</th>
+                            <th>Proyecto</th>
+                            <th>Responsable</th>
+                            <th>Limite presuestario</th>
+                        </tr>
+                    </form>
+                </thead>
+                <tbody>
+                    {% for cuenta in object_list %}
                     <tr>
                         <td><input type="checkbox" name="{{cuenta.idcuenta}}"></td>
                         <td>{{ cuenta.id_cuenta }}</td>
@@ -52,16 +53,18 @@
                             <a href="{% url 'editar_cuenta' cuenta.idcuenta %}" class="btn btn-success btn-sm">Editar</a>
                         </td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-</form>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="{% static 'js/datatables-demo.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/datatables-demo.js' %}"></script>
 {% endblock %}

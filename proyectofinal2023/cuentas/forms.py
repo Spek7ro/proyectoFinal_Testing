@@ -11,7 +11,7 @@ class FormCuentaBancaria(forms.ModelForm):
             'idcuenta': forms.TextInput(
                 attrs={'class':'form-class','placeholder':'ID cuenta'}
             ),
-            'proyecto': forms.TextInput(
+            'proyecto': forms.Select(
                 attrs={'class':'form-class','placeholder':'Proyecto'}
             ),
             'responsable': forms.TextInput(

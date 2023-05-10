@@ -6,9 +6,6 @@ Lista de Proveedores
 {% endblock %}
 
 {% block contenido %}
-<br>
-<h1>Lista De Proveedores</h1>
-<br>
 <form action="{% url 'buscar_proveedor' %}" method="post" id="form">
     {% csrf_token %}
     <table class="table">
@@ -26,44 +23,59 @@ Lista de Proveedores
         </tr>
     </table>
 </form>
-<table class="table">
-        <thead>
-            <form action="{% url 'eliminar_todos' %}" method="post">
-                {% csrf_token %}
-            <tr>
-                <!-- <th>ID</th> -->
-                <td><input type="checkbox" name="todos"></td>
-                <th>RFC</th>
-                <th>Razon Social</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-                <th>Municipio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for proveedor in object_list %}
-            <tr>
-                <!-- <td>{{ proveedor.id }}</td> -->
-                <td><input type="checkbox" name="{{proveedor.id}}"></td>
-                <td>{{ proveedor.rfc }}</td>
-                <td>{{ proveedor.razon_social}}</td>
-                <td>{{ proveedor.direccion}}</td>
-                <td>{{ proveedor.telefono}}</td>
-                <td>{{ proveedor.correo}}</td>
-                <td>{{ proveedor.municipio.nombre}}</td>
-                <td>{{ proveedor.estado.nombre}}</td>
-                <td>
-                    <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                    <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
-    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-    </form>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Lista de Proveedores</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <form action="{% url 'eliminar_todos' %}" method="post">
+                        {% csrf_token %}
+                        <tr>
+                            <!-- <th>ID</th> -->
+                            <td><input type="checkbox" name="todos"></td>
+                            <th>RFC</th>
+                            <th>Razon Social</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                            <th>Correo</th>
+                            <th>Municipio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </form>
+                </thead>
+                <tbody>
+                    {% for proveedor in object_list %}
+                    <tr>
+                        <!-- <td>{{ proveedor.id }}</td> -->
+                        <td><input type="checkbox" name="{{proveedor.id}}"></td>
+                        <td>{{ proveedor.rfc }}</td>
+                        <td>{{ proveedor.razon_social}}</td>
+                        <td>{{ proveedor.direccion}}</td>
+                        <td>{{ proveedor.telefono}}</td>
+                        <td>{{ proveedor.correo}}</td>
+                        <td>{{ proveedor.municipio.nombre}}</td>
+                        <td>{{ proveedor.estado.nombre}}</td>
+                        <td>
+                            <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/datatables-demo.js' %}"></script>
 {% endblock %}
