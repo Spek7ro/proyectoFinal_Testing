@@ -8,6 +8,9 @@ class FormCuentaBancaria(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'idcuenta': forms.TextInput(
+                attrs={'class':'form-class','placeholder':'ID cuenta'}
+            ),
             'proyecto': forms.TextInput(
                 attrs={'class':'form-class','placeholder':'Proyecto'}
             ),
