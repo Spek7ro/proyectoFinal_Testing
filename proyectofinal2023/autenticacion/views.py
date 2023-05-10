@@ -4,16 +4,15 @@ from django.contrib.auth import login,logout, authenticate
 from django.contrib import messages
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
-# Create your views here.
+from .forms import RegistroForm, ReestablecerContraseñaForm
 
 class VRegistro(View):
     def get(self, request):
-        form = UserCreationForm()
+        form = RegistroForm()
         return render(request, "registro/registro.html",{'form':form})
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request,user)
@@ -27,7 +26,7 @@ class VRegistro(View):
 
 def cerrarSesion(request):
     logout(request)
-    return redirect('home')
+    return redirect('iniciar_sesion')
 
 def loguear(request):
     if request.method=="POST":
@@ -40,8 +39,26 @@ def loguear(request):
                 login(request,usuario)
                 return redirect('home')
             else:
-                messages.error(request, "Usuario no válido")
+                messages.error(request, "Usuario no válido")   #No muestra los mensajes
     else:
         messages.error(request, "Información incorrecta")  
     form = AuthenticationForm()
     return render(request, "login/login.html",{'form':form})
+
+def reestablecer_contraseña(request):
+    if request.method=="POST":
+        form = ReestablecerContraseñaForm(request.POST)
+        if form.is_valid():
+            correo = form.cleaned_data.get("email")
+            usuario = authenticate(email=correo)
+            if usuario is not None:
+                nuevaContraseña = form.cleaned_data.get("password1")
+                usuario.set_password(nuevaContraseña)
+                usuario.save()                                        #No reestablece la contraseña
+                return redirect('iniciar_sesion')
+            else:
+                messages.error(request, "Correo no existente")
+    else:  
+        form = ReestablecerContraseñaForm()
+    return render(request, "registro/reestablecer.html",{'form':form})
+
