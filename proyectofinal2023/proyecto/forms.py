@@ -14,8 +14,8 @@ class FormProyecto(forms.ModelForm):
             'nombre_proyecto': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Nombre Proyecto'}
             ),
-            'objetivo': forms.TextInput(
-            attrs={'class':'form-class','placeholder':'Objetivo'}
+            'objetivo': forms.Textarea(
+            attrs={'class':'form-class','placeholder':'Objetivos'}
             ),
             'presupuesto': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'Presupuesto'}
