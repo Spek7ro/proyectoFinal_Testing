@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     {{ accion }} Proveedor
@@ -6,18 +8,17 @@
 
 {% block contenido %}
 <h1>{{ accion }} Proveedor</h1>
-<form method="POST" class="form">
+<form method = "post" class="form-control" style="margin: auto; width: 80%;">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">
-        {% if accion == 'Nuevo' %}
-            Agregar
-        {% else %}
-            Guardar
-        {% endif %}        
-    </button>
-    <a href="{% url 'lista_proveedores' %}" class="btn btn-danger">Regresar</a>
+    <div style="width: 100%; margin: auto;">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">
+            {% if accion == 'Nuevo' %}
+                Agregar
+            {% else %}
+                Guardar
+            {% endif %}        
+        </button>
+        <a href="{% url 'lista_proveedores' %}" class="btn btn-danger">Regresar</a>
 </form>
 {% endblock %}
-
-

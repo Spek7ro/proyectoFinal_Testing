@@ -6,6 +6,21 @@ Lista de Cuentas Bancarias
 {% endblock %}
 
 {% block contenido %}
+<form action="{% url 'buscar_cuenta' %}" method="post" id="form">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <td>{{form.idcuenta}}</td>
+            <td>{{form.proyecto}}</td>
+            <td>{{form.responsable}}</td>
+            <td>{{form.limite_presupuestario}}</td>
+            <td>
+                <input class="btn btn-success" type="submit" value="Buscar">
+                <input type="hidden" name="page" id="page">
+            </td>
+        </tr>
+    </table>
+</form>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Cuentas Bancarias</h4>
@@ -14,50 +29,35 @@ Lista de Cuentas Bancarias
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                    <form action="{% url 'eliminar_todas' %}" method="post">
+                    <form action="{% url 'eliminar_todos' %}" method="post">
                         {% csrf_token %}
-            
                         <tr>
-                            <th><input type="checkbox" name="todos"> Todos</th>
+                            <th><input type="checkbox" name="todas">Todas</th>
                             <th>ID</th>
                             <th>Proyecto</th>
                             <th>Responsable</th>
                             <th>Limite presuestario</th>
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                    <th>Acciones</th>
-                                {% endif %}
-                            {% endif %}
                         </tr>
-                        {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                {% endif %}
-                        {% endif %}
-                        
-                    </form> 
+                    </form>
                 </thead>
                 <tbody>
                     {% for cuenta in object_list %}
                     <tr>
-                        <td><input type="checkbox" name="{{cuenta.id}}"></td>
-                        <td>{{ cuenta.id }}</td>
+                        <td><input type="checkbox" name="{{cuenta.idcuenta}}"></td>
+                        <td>{{ cuenta.id_cuenta }}</td>
                         <td>{{ cuenta.proyecto }}</td>
                         <td>{{ cuenta.responsable }}</td>
                         <td>{{ cuenta.limite_presupuestario }}</td>
-                        {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                <td>
-                                    <a href="{% url 'eliminar_cuenta' cuenta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                    <a href="{% url 'editar_cuenta' cuenta.id %}" class="btn btn-success btn-sm">Editar</a>
-                                </td>
-                                {% endif %}
-                        {% endif %}
+                        <td>
+                            <a href="{% url 'eliminar_cuenta' cuenta.idcuenta %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="{% url 'editar_cuenta' cuenta.idcuenta %}" class="btn btn-success btn-sm">Editar</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
         </div>
     </div>
 </div>
