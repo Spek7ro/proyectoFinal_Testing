@@ -28,7 +28,7 @@ def eliminar_proveedores(request):
         for id in request.POST:
             if id == "csrfmiddlewaretoken":
                 continue
-            elif id == "todas":
+            elif id == "todos":
                 Proveedor.objects.all().delete()
                 return redirect('lista_proveedores')
             Proveedor.objects.get(id=id).delete()

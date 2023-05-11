@@ -23,8 +23,7 @@ class EliminarProyecto(StaffRequiredMixin,DeleteView):
     model = Proyecto
     success_url = reverse_lazy('lista_proyectos') 
     
-def eliminar_proyectos(request):
-    print(request.POST)
+def eliminar_todos(request):
     if request.method == 'POST':
         for num_proyecto in request.POST:
             if num_proyecto == "csrfmiddlewaretoken":

@@ -6,11 +6,7 @@ Lista de Proyectos
 {% endblock %}
 
 {% block contenido %}
-<<<<<<< HEAD
 <form action="{% url 'buscar_proyectos' %}" method="post" id="form" style="margin: auto;">
-=======
-<form action="{% url 'buscar_proyecto' %}" method="post" id="form">
->>>>>>> 24e6df58bc88811440596665facbaf02b971d56c
     {% csrf_token %}
         <table class="table">
             <tr>
@@ -72,15 +68,17 @@ Lista de Proyectos
                                     <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
                                     <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
                                 </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                    {% if request.user.is_authenticated %}
-                        {% if request.user.is_staff %}
-                            <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            {% endif %}
                         {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     {% endif %}
+                {% endif %}
             </form>
             <div class="pagination">
                 <span class="step-links">
