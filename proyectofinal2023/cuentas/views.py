@@ -27,13 +27,13 @@ class EliminarCuentaBancaria(StaffRequiredMixin,DeleteView):
     
 def eliminar_todas(request):
     if request.method == 'POST':
-        for id in request.POST:
-            if id == "csrfmiddlewaretoken":
+        for idcuenta in request.POST:
+            if idcuenta == "csrfmiddlewaretoken":
                 continue
-            elif id == "todas":
+            elif idcuenta == "todas":
                 CuentaBancaria.objects.all().delete()
                 return redirect('lista_cuentas')
-            CuentaBancaria.objects.get(id=id).delete()
+            CuentaBancaria.objects.get(idcuenta=idcuenta).delete()
     
     return redirect('lista_cuentas')
 

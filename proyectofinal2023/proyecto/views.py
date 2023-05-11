@@ -25,13 +25,13 @@ class EliminarProyecto(StaffRequiredMixin,DeleteView):
     
 def eliminar_todos(request):
     if request.method == 'POST':
-        for id in request.POST:
-            if id == "csrfmiddlewaretoken":
+        for num_proyecto in request.POST:
+            if num_proyecto == "csrfmiddlewaretoken":
                 continue
-            elif id == "todos":
+            elif num_proyecto == "todos":
                 Proyecto.objects.all().delete()
                 return redirect('lista_proyectos')
-            Proyecto.objects.get(id=id).delete()
+            Proyecto.objects.get(num_proyecto=num_proyecto).delete()
     
     return redirect('lista_proyectos')
 
