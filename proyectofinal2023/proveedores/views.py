@@ -23,7 +23,7 @@ class EliminarProveedor(StaffRequiredMixin,DeleteView):
     model = Proveedor
     success_url = reverse_lazy('lista_proveedores') 
    
-def eliminar_proveedores(request):
+def eliminar_todos(request):
     if request.method == 'POST':
         for id in request.POST:
             if id == "csrfmiddlewaretoken":

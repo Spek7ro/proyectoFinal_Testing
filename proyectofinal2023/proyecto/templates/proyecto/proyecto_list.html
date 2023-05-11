@@ -6,11 +6,7 @@ Lista de Proyectos
 {% endblock %}
 
 {% block contenido %}
-<<<<<<< HEAD
 <form action="{% url 'buscar_proyectos' %}" method="post" id="form" style="margin: auto;">
-=======
-<form action="{% url 'buscar_proyecto' %}" method="post" id="form">
->>>>>>> 24e6df58bc88811440596665facbaf02b971d56c
     {% csrf_token %}
         <table class="table">
             <tr>
@@ -34,7 +30,7 @@ Lista de Proyectos
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <form action="{% url 'eliminar_proyectos' %}" method="post">
+                <form action="{% url 'eliminar_todos' %}" method="post">
                     {% csrf_token %}
                     <thead>
                         <tr>
@@ -53,7 +49,6 @@ Lista de Proyectos
                             {% endif %}
                         </tr>
                     </thead>
-<<<<<<< HEAD
                 </thead>
                 <tbody>
                     {% for proyecto in object_list %}
@@ -69,24 +64,10 @@ Lista de Proyectos
                         
                         {% if request.user.is_authenticated %}
                                 {% if request.user.is_staff %}
-=======
-                    <tbody>
-                        {% for proyecto in object_list %}
-                            <tr>
-                                <td><input type="checkbox" name="{{proyecto.num_proyecto}}"></td>
-                                <td>{{ proyecto.num_proyecto }}</td>
-                                <td>{{ proyecto.nombre_proyecto}}</td>
-                                <td>{{ proyecto.objetivo}}</td>
-                                <td>{{ proyecto.presupuesto}}</td>
-                                <td>{{ proyecto.duracion}}</td>
-                                <td>{{ proyecto.responsables}}</td>
-                                <td>{{ proyecto.proveedor.razon_social}}</td>
->>>>>>> 24e6df58bc88811440596665facbaf02b971d56c
                                 <td>
                                     <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
                                     <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
                                 </td>
-<<<<<<< HEAD
                             {% endif %}
                         {% endif %}
                     </tr>
@@ -96,17 +77,8 @@ Lista de Proyectos
                     {% if request.user.is_staff %}
                         <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-=======
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                    {% if request.user.is_authenticated %}
-                        {% if request.user.is_staff %}
-                            <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        {% endif %}
->>>>>>> 24e6df58bc88811440596665facbaf02b971d56c
                     {% endif %}
+                {% endif %}
             </form>
             <div class="pagination">
                 <span class="step-links">
