@@ -6,6 +6,17 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import RegistroForm, ReestablecerContraseñaForm
 
+from django.contrib.auth.models import User, Group
+from django.db.models.signals import post_save
+
+
+def add_user_to_group(sender, instance, created, **kwargs):
+    if created:
+        group = Group.objects.get(name='Investigadores')
+        instance.groups.add(group)
+
+post_save.connect(add_user_to_group, sender=User)
+
 class VRegistro(View):
     def get(self, request):
         form = RegistroForm()
@@ -17,7 +28,6 @@ class VRegistro(View):
             user = form.save()
             login(request,user)
             return redirect('home')
-        
         else:
             for msg in form.error_messages:
                 messages.error(request,form.error_messages[msg])

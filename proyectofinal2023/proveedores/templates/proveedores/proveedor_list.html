@@ -26,10 +26,22 @@ Lista de Proveedores
                             <th>Correo</th>
                             <th>Municipio</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <th>Acciones</th>
+                                {% endif %}
+                            {% endif %}
+                            
                         </tr>
-                        <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <!--Crea solo los botones para staff (tecnicos y administradores)-->
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            {% endif %}
+                        {% endif %}
+                        
+                        
                     </form>
                 </thead>
                 <tbody>
@@ -44,10 +56,14 @@ Lista de Proveedores
                         <td>{{ proveedor.correo}}</td>
                         <td>{{ proveedor.municipio.nombre}}</td>
                         <td>{{ proveedor.estado.nombre}}</td>
-                        <td>
-                            <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
-                        </td>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <td>
+                                <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
+                            </td>
+                            {% endif %}
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

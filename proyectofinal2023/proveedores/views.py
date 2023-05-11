@@ -6,20 +6,22 @@ from .models import Proveedor, Municipio, Estado
 from .forms import FormProveedor, FormProveedorEditar
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from proyectofinal2023.utils import StaffRequiredMixin
 
-class ListaProveedores(ListView):
+class ListaProveedores(LoginRequiredMixin,ListView):
     model = Proveedor
 
-class NuevoProveedor(CreateView):
+class NuevoProveedor(StaffRequiredMixin,CreateView):
     model = Proveedor
     form_class = FormProveedor
     extra_context = {'accion': 'Nuevo'}
     success_url = reverse_lazy('lista_proveedores')
 
-class EliminarProveedor(DeleteView):
+class EliminarProveedor(StaffRequiredMixin,DeleteView):
     model = Proveedor
     success_url = reverse_lazy('lista_proveedores') 
-    
+   
 def eliminar_todos(request):
     if request.method == 'POST':
         for id in request.POST:
@@ -32,13 +34,13 @@ def eliminar_todos(request):
     
     return redirect('lista_proveedores')
 
-class EditarProveedor(UpdateView):
+class EditarProveedor(StaffRequiredMixin,UpdateView):
     model = Proveedor
     form_class = FormProveedorEditar
     extra_context = {'accion': 'Editar'}
     success_url = reverse_lazy('lista_proveedores')
 
-class Bienvenida(TemplateView):
+class Bienvenida(LoginRequiredMixin,TemplateView):
     template_name = 'home.html'
 
 def buscar_municipios(request):

@@ -17,7 +17,7 @@ Lista de Proyectos
                     <form action="{% url 'eliminar_todos' %}" method="post">
                         {% csrf_token %}
                         <tr>
-                            <th><input type="checkbox" name="todos">Todas</th>
+                            <th><input type="checkbox" name="todos"> Todos</th>
                             <th>NUM Proyecto</th>
                             <th>Nombre Proyecto</th>
                             <th>Objetivo</th>
@@ -25,10 +25,20 @@ Lista de Proyectos
                             <th>Duracion (Meses)</th>
                             <th>Responsables</th>
                             <th>Proveedor</th>
-                            <th>Acciones</th>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <th>Acciones</th>
+                                {% endif %}
+                            {% endif %}
                         </tr>
-                        <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                <td>
+                                    <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
+                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>>
+                                </td>
+                                {% endif %}
+                        {% endif %}
                     </form>
                 </thead>
                 </thead>
@@ -43,10 +53,14 @@ Lista de Proyectos
                         <td>{{ proyecto.duracion}}</td>
                         <td>{{ proyecto.responsables}}</td>
                         <td>{{ proyecto.proveedor.razon_social}}</td>
-                        <td>
-                            <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
-                        </td>
+                        {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                <td>
+                                    <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
+                                </td>
+                                {% endif %}
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>

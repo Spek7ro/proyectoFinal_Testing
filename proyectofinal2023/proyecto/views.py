@@ -4,18 +4,19 @@ from django.views.generic import ListView
 from .models import Proyecto
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import FormProyecto, FormProyectoEditar
+from django.contrib.auth.mixins import LoginRequiredMixin
+from proyectofinal2023.utils import StaffRequiredMixin
 
-
-class ListaProyectos(ListView):
+class ListaProyectos(LoginRequiredMixin,ListView):
     model = Proyecto
 
-class NuevoProyecto(CreateView):
+class NuevoProyecto(StaffRequiredMixin,CreateView):
     model = Proyecto
     form_class = FormProyecto
     extra_context = {'accion': 'Nuevo'}
     success_url = reverse_lazy('lista_proyectos')
 
-class EliminarProyecto(DeleteView):
+class EliminarProyecto(StaffRequiredMixin,DeleteView):
     model = Proyecto
     success_url = reverse_lazy('lista_proyectos') 
     
@@ -31,7 +32,7 @@ def eliminar_todos(request):
     
     return redirect('lista_proyectos')
 
-class EditarProyecto(UpdateView):
+class EditarProyecto(StaffRequiredMixin,UpdateView):
     model = Proyecto
     form_class = FormProyectoEditar
     extra_context = {'accion': 'Editar'}
