@@ -6,24 +6,29 @@ Lista de Proyectos
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'buscar_proyectos' %}" method="post" id="form">
+<form action="{% url 'buscar_proyectos' %}" method="post" id="form" style="margin: auto;">
     {% csrf_token %}
-    <table class="table">
-        <tr>
-            <td>{{form.num_proyecto}}</td>
-            <td>{{form.nombre_proyecto}}</td>
-            <td>{{form.presupuesto}}</td>
-            <td>{{form.duracion}}</td>
-            <td>{{form.responsables}}</td>
-            <td>{{form.proveedor}}</td>            
-            <td>
-                <input class="btn btn-success" type="submit" value="Buscar">
-                <input type="hidden" name="page" id="page">
-            </td>
-        </tr>
-    </table>
+    
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_staff %}
+        <table class="table">
+            <tr>
+                <td>{{form.num_proyecto}}</td>
+                <td>{{form.nombre_proyecto}}</td>
+                <td>{{form.presupuesto}}</td>
+                <td>{{form.duracion}}</td>
+                <td>{{form.responsables}}</td>
+                <td>{{form.proveedor}}</td>            
+                <td>
+                    <input class="btn btn-success" type="submit" value="Buscar">
+                    <input type="hidden" name="page" id="page">
+                </td>
+            </tr>
+        </table>
+        {% endif %}
+    {% endif %}
 </form>
-<div class="card shadow mb-4">
+<div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Proyectos</h4>
     </div>
@@ -61,10 +66,15 @@ Lista de Proyectos
                         <td>{{ proyecto.duracion}}</td>
                         <td>{{ proyecto.responsables}}</td>
                         <td>{{ proyecto.proveedor.razon_social}}</td>
-                        <td>
-                            <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
-                        </td>
+                        
+                        {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                <td>
+                                    <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
+                                </td>
+                            {% endif %}
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

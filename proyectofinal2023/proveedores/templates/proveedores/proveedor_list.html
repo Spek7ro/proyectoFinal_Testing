@@ -6,7 +6,7 @@ Lista de Proveedores
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'buscar_proveedor' %}" method="post" id="form">
+<form action="{% url 'buscar_proveedor' %}" method="post" id="form" style="margin: auto;">
     {% csrf_token %}
     <table class="table">
         <tr>
@@ -23,7 +23,7 @@ Lista de Proveedores
         </tr>
     </table>
 </form>
-<div class="card shadow mb-4">
+<div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Proveedores</h4>
     </div>
@@ -63,10 +63,15 @@ Lista de Proveedores
                             <td>{{ proveedor.correo}}</td>
                             <td>{{ proveedor.municipio.nombre}}</td>
                             <td>{{ proveedor.estado.nombre}}</td>
+                            
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
                             <td>
                                 <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
                                 <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
                             </td>
+                            {% endif %}
+                        {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

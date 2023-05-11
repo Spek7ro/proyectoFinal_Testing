@@ -33,7 +33,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
-                <div class="sidebar-brand-text mx-3">INIFAP <sup>Zac</sup></div>
+                <div><img src="{% static 'img/logo.png' %}" alt="logo INIFAP" width="85%" style="display: block; margin: 0 auto;"></div>
             </a>
 
             <!-- Divider -->
@@ -65,7 +65,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Proveedores</h6>
                         <a class="collapse-item" href="{% url 'lista_proveedores' %}">Lista</a>
-                        <a class="collapse-item" href="{% url 'agregar_proveedor' %}">Agregar</a>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <a class="collapse-item" href="{% url 'agregar_proveedor' %}">Agregar</a>
+                            {% endif %}
+                        {% endif %}
+                        
                     </div>
                 </div>
             </li>
@@ -82,7 +87,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Proyectos</h6>
                         <a class="collapse-item" href="{% url 'lista_proyectos'%}">Lista</a>
-                        <a class="collapse-item" href="{% url 'agregar_proyecto'%}">Agregar</a>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <a class="collapse-item" href="{% url 'agregar_proyecto'%}">Agregar</a>
+                            {% endif %}
+                        {% endif %}
+                        
                     </div>
                 </div>
             </li>
@@ -99,7 +109,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cuentas Bancarias</h6>
                         <a class="collapse-item" href="{% url 'lista_cuentas'%}">Lista</a>
-                        <a class="collapse-item" href="{% url 'agregar_cuenta'%}">Agregar</a>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <a class="collapse-item" href="{% url 'agregar_cuenta'%}">Agregar</a>
+                            {% endif %}
+                        {% endif %}
+                        
                     </div>
                 </div>
             </li>
