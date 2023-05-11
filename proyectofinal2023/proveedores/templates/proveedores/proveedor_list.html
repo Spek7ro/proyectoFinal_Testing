@@ -6,23 +6,6 @@ Lista de Proveedores
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'buscar_proveedor' %}" method="post" id="form">
-    {% csrf_token %}
-    <table class="table">
-        <tr>
-            <td>{{form.rfc}}</td>
-            <td>{{form.direccion}}</td>
-            <td>{{form.telefono}}</td>
-            <td>{{form.correo}}</td>
-            <td>{{form.municipio}}</td>
-            <td>{{form.estado}}</td>            
-            <td>
-                <input class="btn btn-success" type="submit" value="Buscar">
-                <input type="hidden" name="page" id="page">
-            </td>
-        </tr>
-    </table>
-</form>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Proveedores</h4>
@@ -43,8 +26,22 @@ Lista de Proveedores
                             <th>Correo</th>
                             <th>Municipio</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <th>Acciones</th>
+                                {% endif %}
+                            {% endif %}
+                            
                         </tr>
+                        <!--Crea solo los botones para staff (tecnicos y administradores)-->
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            {% endif %}
+                        {% endif %}
+                        
+                        
                     </form>
                 </thead>
                 <tbody>
@@ -59,16 +56,18 @@ Lista de Proveedores
                         <td>{{ proveedor.correo}}</td>
                         <td>{{ proveedor.municipio.nombre}}</td>
                         <td>{{ proveedor.estado.nombre}}</td>
-                        <td>
-                            <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
-                        </td>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff %}
+                            <td>
+                                <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
+                            </td>
+                            {% endif %}
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
-            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
         </div>
     </div>
 </div>
