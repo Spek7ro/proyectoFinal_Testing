@@ -28,7 +28,7 @@ Lista de Cuentas Bancarias
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <form action="{% url 'eliminar_todos' %}" method="post">
+                <form action="{% url 'eliminar_cuentas' %}" method="post">
                     <thead>
                         {% csrf_token %}
                         <tr>
@@ -65,10 +65,10 @@ Lista de Cuentas Bancarias
                         {% endfor %}
                     </tbody>
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_staff %}
-                    <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    {% endif %}
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        {% endif %}
                     {% endif %}
                 </form>
                 <div class="pagination">
