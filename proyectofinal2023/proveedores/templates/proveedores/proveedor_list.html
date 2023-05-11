@@ -8,20 +8,20 @@ Lista de Proveedores
 {% block contenido %}
 <form action="{% url 'buscar_proveedor' %}" method="post" id="form" style="margin: auto;">
     {% csrf_token %}
-    <table class="table">
-        <tr>
-            <td>{{form.rfc}}</td>
-            <td>{{form.direccion}}</td>
-            <td>{{form.telefono}}</td>
-            <td>{{form.correo}}</td>
-            <td>{{form.municipio}}</td>
-            <td>{{form.estado}}</td>            
-            <td>
-                <input class="btn btn-success" type="submit" value="Buscar">
-                <input type="hidden" name="page" id="page">
-            </td>
-        </tr>
-    </table>
+        <table class="table">
+            <tr>
+                <td>{{form.rfc}}</td>
+                <td>{{form.direccion}}</td>
+                <td>{{form.telefono}}</td>
+                <td>{{form.correo}}</td>
+                <td>{{form.municipio}}</td>
+                <td>{{form.estado}}</td>            
+                <td>
+                    <input class="btn btn-success" type="submit" value="Buscar">
+                    <input type="hidden" name="page" id="page">
+                </td>
+            </tr>
+        </table>
 </form>
 <div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">

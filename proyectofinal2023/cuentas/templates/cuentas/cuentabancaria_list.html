@@ -8,8 +8,6 @@ Lista de Cuentas Bancarias
 {% block contenido %}
 <form action="{% url 'buscar_cuenta' %}" method="post" id="form" style="margin: auto;">
     {% csrf_token %}
-    {% if request.user.is_authenticated %}
-        {% if request.user.is_staff %}
         <table class="table">
             <tr>
                 <td>{{form.idcuenta}}</td>
@@ -22,9 +20,6 @@ Lista de Cuentas Bancarias
                 </td>
             </tr>
         </table>
-        {% endif %}
-    {% endif %}
-    
 </form>
 <div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
