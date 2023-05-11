@@ -32,12 +32,44 @@ Lista de Cuentas Bancarias
                     <thead>
                         {% csrf_token %}
                         <tr>
-                            <th><input type="checkbox" name="todas">Todas</th>
+                            <th><input type="checkbox" name="todos"> Todos</th>
                             <th>ID</th>
                             <th>Proyecto</th>
                             <th>Responsable</th>
                             <th>Limite presuestario</th>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                        {% endif %}
+                            {% endif %}
                         </tr>
+                        {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                {% endif %}
+                        {% endif %}
+                        
+                    </form> 
+                </thead>
+                <tbody>
+                    {% for cuenta in object_list %}
+                    <tr>
+                        <td><input type="checkbox" name="{{cuenta.id}}"></td>
+                        <td>{{ cuenta.id }}</td>
+                        <td>{{ cuenta.proyecto }}</td>
+                        <td>{{ cuenta.responsable }}</td>
+                        <td>{{ cuenta.limite_presupuestario }}</td>
+                        {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                <td>
+                                    <a href="{% url 'eliminar_cuenta' cuenta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="{% url 'editar_cuenta' cuenta.id %}" class="btn btn-success btn-sm">Editar</a>
+                                </td>
+                                {% endif %}
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
                     </thead>
                     <tbody>
                         {% for cuenta in object_list %}

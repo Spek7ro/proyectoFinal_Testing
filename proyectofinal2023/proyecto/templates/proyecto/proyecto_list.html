@@ -34,7 +34,7 @@ Lista de Proyectos
                     {% csrf_token %}
                     <thead>
                         <tr>
-                            <th><input type="checkbox" name="todos">Todas</th>
+                            <th><input type="checkbox" name="todos"> Todos</th>
                             <th>NUM Proyecto</th>
                             <th>Nombre Proyecto</th>
                             <th>Objetivo</th>
@@ -42,45 +42,35 @@ Lista de Proyectos
                             <th>Duracion (Meses)</th>
                             <th>Responsables</th>
                             <th>Proveedor</th>
-                            <th>Acciones</th>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <th>Acciones</th>
+                                {% endif %}
+                            {% endif %}
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for proyecto in object_list %}
-                        <tr>
-                            <td><input type="checkbox" name="{{proyecto.id}}"></td>
-                            <td>{{ proyecto.num_proyecto }}</td>
-                            <td>{{ proyecto.nombre_proyecto}}</td>
-                            <td>{{ proyecto.objetivo}}</td>
-                            <td>{{ proyecto.presupuesto}}</td>
-                            <td>{{ proyecto.duracion}}</td>
-                            <td>{{ proyecto.responsables}}</td>
-                            <td>{{ proyecto.proveedor.razon_social}}</td>
-                            <td>
-                                <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </form>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="javascript:enviar(1);">&laquo; first</a>
-                            <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
-                        {% endif %}
-                
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-                
-                        {% if page_obj.has_next %}
-                            <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
-                            <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
+                        <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </thead>
+                </thead>
+                <tbody>
+                    {% for proyecto in object_list %}
+                    <tr>
+                        <td><input type="checkbox" name="{{proyecto.id}}"></td>
+                        <td>{{ proyecto.num_proyecto }}</td>
+                        <td>{{ proyecto.nombre_proyecto}}</td>
+                        <td>{{ proyecto.objetivo}}</td>
+                        <td>{{ proyecto.presupuesto}}</td>
+                        <td>{{ proyecto.duracion}}</td>
+                        <td>{{ proyecto.responsables}}</td>
+                        <td>{{ proyecto.proveedor.razon_social}}</td>
+                        <td>
+                            <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
             </table>
             <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
