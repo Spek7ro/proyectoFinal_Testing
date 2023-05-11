@@ -48,10 +48,7 @@ Lista de Proyectos
                                 {% endif %}
                             {% endif %}
                         </tr>
-                        <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    </form>
-                </thead>
+                    </thead>
                 </thead>
                 <tbody>
                     {% for proyecto in object_list %}
@@ -69,11 +66,33 @@ Lista de Proyectos
                             <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
                         </td>
                     </tr>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
-            </table>
-            <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
-            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    {% endif %}
+                {% endif %}
+            </form>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="javascript:enviar(1);">&laquo; first</a>
+                        <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
+                        <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </table>
         </div>
     </div>
 </div>

@@ -70,6 +70,13 @@ Lista de Proveedores
                         </tr>
                         {% endfor %}
                     </tbody>
+                    <!--Crea solo los botones para staff (tecnicos y administradores)-->
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        {% endif %}
+                    {% endif %}
                 </form>
                 <div class="pagination">
                     <span class="step-links">
@@ -88,13 +95,7 @@ Lista de Proveedores
                         {% endif %}
                     </span>
                 </div>
-                <!--Crea solo los botones para staff (tecnicos y administradores)-->
-                {% if request.user.is_authenticated %}
-                    {% if request.user.is_staff %}
-                    <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    {% endif %}
-                {% endif %}
+                
                         
                 
         </div>

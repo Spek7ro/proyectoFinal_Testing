@@ -42,13 +42,6 @@ Lista de Cuentas Bancarias
                                         {% endif %}
                             {% endif %}
                         </tr>
-                        {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                {% endif %}
-                        {% endif %}
-                        
                     </form> 
                 </thead>
                     <tbody>
@@ -66,6 +59,12 @@ Lista de Cuentas Bancarias
                         </tr>
                         {% endfor %}
                     </tbody>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        {% endif %}
+                    {% endif %}
                 </form>
                 <div class="pagination">
                     <span class="step-links">
@@ -85,8 +84,6 @@ Lista de Cuentas Bancarias
                     </span>
                 </div>
             </table>
-            <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
-            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
         </div>
     </div>
 </div>
