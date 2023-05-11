@@ -28,8 +28,8 @@ Lista de Cuentas Bancarias
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <form action="{% url 'eliminar_todos' %}" method="post">
+                <form action="{% url 'eliminar_todos' %}" method="post">
+                    <thead>
                         {% csrf_token %}
                         <tr>
                             <th><input type="checkbox" name="todas">Todas</th>
@@ -38,23 +38,40 @@ Lista de Cuentas Bancarias
                             <th>Responsable</th>
                             <th>Limite presuestario</th>
                         </tr>
-                    </form>
-                </thead>
-                <tbody>
-                    {% for cuenta in object_list %}
-                    <tr>
-                        <td><input type="checkbox" name="{{cuenta.idcuenta}}"></td>
-                        <td>{{ cuenta.id_cuenta }}</td>
-                        <td>{{ cuenta.proyecto }}</td>
-                        <td>{{ cuenta.responsable }}</td>
-                        <td>{{ cuenta.limite_presupuestario }}</td>
-                        <td>
-                            <a href="{% url 'eliminar_cuenta' cuenta.idcuenta %}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{% url 'editar_cuenta' cuenta.idcuenta %}" class="btn btn-success btn-sm">Editar</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {% for cuenta in object_list %}
+                        <tr>
+                            <td><input type="checkbox" name="{{cuenta.idcuenta}}"></td>
+                            <td>{{ cuenta.idcuenta }}</td>
+                            <td>{{ cuenta.proyecto }}</td>
+                            <td>{{ cuenta.responsable }}</td>
+                            <td>{{ cuenta.limite_presupuestario }}</td>
+                            <td>
+                                <a href="{% url 'eliminar_cuenta' cuenta.idcuenta %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{% url 'editar_cuenta' cuenta.idcuenta %}" class="btn btn-success btn-sm">Editar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </form>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="javascript:enviar(1);">&laquo; first</a>
+                            <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
+                            <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </table>
             <a href="{% url 'agregar_cuenta' %}" class="btn btn-success btn-sm">Agregar</a>
             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -64,6 +81,12 @@ Lista de Cuentas Bancarias
 {% endblock %}
 
 {% block scripts %}
+<script>
+    function enviar(page){
+        $("#page").val(page);
+        $("#form").submit();
+    }
+</script>
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 <script src="{% static 'js/datatables-demo.js' %}"></script>

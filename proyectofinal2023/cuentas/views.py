@@ -71,7 +71,7 @@ def buscar_cuenta(request):
     else:
         form = FiltrosCuenta()
         
-    paginator = Paginator(cuentas, 2)  # Show 25 contacts per page.
+    paginator = Paginator(cuentas, 2)  
     page_number = request.POST.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
