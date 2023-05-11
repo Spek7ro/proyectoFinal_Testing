@@ -25,7 +25,7 @@ class EliminarCuentaBancaria(StaffRequiredMixin,DeleteView):
     model = CuentaBancaria
     success_url = reverse_lazy('lista_cuentas') 
     
-def eliminar_todas(request):
+def eliminar_cuentas(request):
     if request.method == 'POST':
         for idcuenta in request.POST:
             if idcuenta == "csrfmiddlewaretoken":
