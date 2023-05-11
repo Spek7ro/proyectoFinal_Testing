@@ -87,7 +87,7 @@ def buscar_proveedor(request):
     else:
         form = FiltrosProveedor()
         
-    paginator = Paginator(proveedor, 2)  # Show 25 contacts per page.
+    paginator = Paginator(proveedor, 5)  # Show 25 contacts per page.
     page_number = request.POST.get("page")
     page_obj = paginator.get_page(page_number)
     context = {

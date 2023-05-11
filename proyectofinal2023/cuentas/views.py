@@ -11,6 +11,7 @@ from proyectofinal2023.utils import StaffRequiredMixin
 
 class ListaCuentasBancarias(LoginRequiredMixin,ListView):
     paginate_by = 5
+    
     model = CuentaBancaria
     extra_context = {'form': FiltrosCuenta}
 
@@ -73,7 +74,7 @@ def buscar_cuenta(request):
     else:
         form = FiltrosCuenta()
         
-    paginator = Paginator(cuentas, 2)  
+    paginator = Paginator(cuentas, 5)  
     page_number = request.POST.get("page")
     page_obj = paginator.get_page(page_number)
     context = {

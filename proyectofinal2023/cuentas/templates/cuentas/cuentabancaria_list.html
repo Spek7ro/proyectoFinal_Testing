@@ -51,26 +51,6 @@ Lista de Cuentas Bancarias
                         
                     </form> 
                 </thead>
-                <tbody>
-                    {% for cuenta in object_list %}
-                    <tr>
-                        <td><input type="checkbox" name="{{cuenta.id}}"></td>
-                        <td>{{ cuenta.id }}</td>
-                        <td>{{ cuenta.proyecto }}</td>
-                        <td>{{ cuenta.responsable }}</td>
-                        <td>{{ cuenta.limite_presupuestario }}</td>
-                        {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                <td>
-                                    <a href="{% url 'eliminar_cuenta' cuenta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                    <a href="{% url 'editar_cuenta' cuenta.id %}" class="btn btn-success btn-sm">Editar</a>
-                                </td>
-                                {% endif %}
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                    </thead>
                     <tbody>
                         {% for cuenta in object_list %}
                         <tr>
