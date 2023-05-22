@@ -18,10 +18,18 @@ class NuevoProyecto(StaffRequiredMixin,CreateView):
     form_class = FormProyecto
     extra_context = {'accion': 'Nuevo'}
     success_url = reverse_lazy('lista_proyectos')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
 
 class EliminarProyecto(StaffRequiredMixin,DeleteView):
     model = Proyecto
-    success_url = reverse_lazy('lista_proyectos') 
+    success_url = reverse_lazy('lista_proyectos')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs) 
     
 def eliminar_todos(request):
     if request.method == 'POST':
@@ -40,6 +48,10 @@ class EditarProyecto(StaffRequiredMixin,UpdateView):
     form_class = FormProyectoEditar
     extra_context = {'accion': 'Editar'}
     success_url = reverse_lazy('lista_proyectos')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
 
 def buscar_proyecto(request):
     proyecto = Proyecto.objects.all().order_by('num_proyecto','nombre_proyecto')

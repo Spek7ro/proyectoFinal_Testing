@@ -20,10 +20,18 @@ class NuevaCuentaBancaria(StaffRequiredMixin,CreateView):
     form_class = FormCuentaBancaria
     extra_context = {'accion': 'Nueva'}
     success_url = reverse_lazy('lista_cuentas')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
 
 class EliminarCuentaBancaria(StaffRequiredMixin,DeleteView):
     model = CuentaBancaria
-    success_url = reverse_lazy('lista_cuentas') 
+    success_url = reverse_lazy('lista_cuentas')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs) 
     
 def eliminar_cuentas(request):
     if request.method == 'POST':
@@ -42,6 +50,10 @@ class EditarCuentaBancaria(StaffRequiredMixin,UpdateView):
     form_class = FormCuentaBancariaEditar
     extra_context = {'accion': 'Editar'}
     success_url = reverse_lazy('lista_cuentas')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
 
 class Bienvenida(TemplateView):
     template_name = 'home.html'

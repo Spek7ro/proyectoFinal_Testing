@@ -10,6 +10,7 @@ from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 
 
+
 def add_user_to_group(sender, instance, created, **kwargs):
     if created:
         group = Group.objects.get(name='Investigadores')
@@ -37,6 +38,10 @@ class VRegistro(View):
 def cerrarSesion(request):
     logout(request)
     return redirect('iniciar_sesion')
+
+def error404(request):
+    logout(request)
+    return render(request, "404.html")
 
 def loguear(request):
     if request.method=="POST":
@@ -71,4 +76,5 @@ def reestablecer_contraseña(request):
     else:  
         form = ReestablecerContraseñaForm()
     return render(request, "registro/reestablecer.html",{'form':form})
+
 

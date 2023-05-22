@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from proyectofinal2023.utils import StaffRequiredMixin
+from django.http import HttpResponseNotFound
 
 class ListaProveedores(LoginRequiredMixin,ListView):
     model = Proveedor
@@ -18,10 +19,19 @@ class NuevoProveedor(StaffRequiredMixin,CreateView):
     form_class = FormProveedor
     extra_context = {'accion': 'Nuevo'}
     success_url = reverse_lazy('lista_proveedores')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
+    
 
 class EliminarProveedor(StaffRequiredMixin,DeleteView):
     model = Proveedor
-    success_url = reverse_lazy('lista_proveedores') 
+    success_url = reverse_lazy('lista_proveedores')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
    
 def eliminar_proveedores(request):
     if request.method == 'POST':
@@ -40,9 +50,18 @@ class EditarProveedor(StaffRequiredMixin,UpdateView):
     form_class = FormProveedorEditar
     extra_context = {'accion': 'Editar'}
     success_url = reverse_lazy('lista_proveedores')
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_staff:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class Bienvenida(LoginRequiredMixin,TemplateView):
     template_name = 'home.html'
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('error_404')
+        return super().dispatch(request, *args, **kwargs)
 
 def buscar_municipios(request):
     id_estado = request.POST.get('id_estado', None)
