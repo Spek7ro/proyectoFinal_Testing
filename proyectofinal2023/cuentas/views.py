@@ -22,7 +22,7 @@ class NuevaCuentaBancaria(StaffRequiredMixin,CreateView):
     success_url = reverse_lazy('lista_cuentas')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 class EliminarCuentaBancaria(StaffRequiredMixin,DeleteView):
@@ -30,7 +30,7 @@ class EliminarCuentaBancaria(StaffRequiredMixin,DeleteView):
     success_url = reverse_lazy('lista_cuentas')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs) 
     
 def eliminar_cuentas(request):
@@ -52,7 +52,7 @@ class EditarCuentaBancaria(StaffRequiredMixin,UpdateView):
     success_url = reverse_lazy('lista_cuentas')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 class Bienvenida(TemplateView):

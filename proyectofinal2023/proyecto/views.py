@@ -20,7 +20,7 @@ class NuevoProyecto(StaffRequiredMixin,CreateView):
     success_url = reverse_lazy('lista_proyectos')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 class EliminarProyecto(StaffRequiredMixin,DeleteView):
@@ -28,7 +28,7 @@ class EliminarProyecto(StaffRequiredMixin,DeleteView):
     success_url = reverse_lazy('lista_proyectos')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs) 
     
 def eliminar_todos(request):
@@ -50,7 +50,7 @@ class EditarProyecto(StaffRequiredMixin,UpdateView):
     success_url = reverse_lazy('lista_proyectos')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 def buscar_proyecto(request):

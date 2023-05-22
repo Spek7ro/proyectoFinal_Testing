@@ -21,7 +21,7 @@ class NuevoProveedor(StaffRequiredMixin,CreateView):
     success_url = reverse_lazy('lista_proveedores')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
     
 
@@ -30,7 +30,7 @@ class EliminarProveedor(StaffRequiredMixin,DeleteView):
     success_url = reverse_lazy('lista_proveedores')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
    
 def eliminar_proveedores(request):
@@ -52,7 +52,7 @@ class EditarProveedor(StaffRequiredMixin,UpdateView):
     success_url = reverse_lazy('lista_proveedores')
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('error_404')
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 
