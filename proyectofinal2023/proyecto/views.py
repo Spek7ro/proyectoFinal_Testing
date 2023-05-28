@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from .models import Proyecto
+from django.db import models
+from costos.models import Costo
+from django.contrib import messages
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import FormProyecto, FormProyectoEditar, FiltrosProyecto
 from django.core.paginator import Paginator
@@ -18,10 +21,14 @@ class NuevoProyecto(StaffRequiredMixin,CreateView):
     form_class = FormProyecto
     extra_context = {'accion': 'Nuevo'}
     success_url = reverse_lazy('lista_proyectos')
+
+    
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
+
+
 
 class EliminarProyecto(StaffRequiredMixin,DeleteView):
     model = Proyecto

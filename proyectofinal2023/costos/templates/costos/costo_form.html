@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{ accion }} Costo
+{% endblock %}
+
+{% block contenido %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<h1 style="margin: auto;">{{ accion }} Costo</h1>
+<form method = "post" class="form-control" style="margin: auto; width: 80%;">
+    {% csrf_token %}
+    <div style="width: 100%; margin: auto;">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">
+            {% if accion == 'Nuevo' %}
+                Agregar
+            {% else %}
+                Guardar
+            {% endif %}        
+        </button>
+        <a href="{% url 'lista_costos' %}" class="btn btn-danger">Regresar</a>
+</form>
+{% endblock %}
+
+

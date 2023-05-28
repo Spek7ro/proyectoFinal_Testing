@@ -6,7 +6,7 @@ class Proyecto(models.Model):
     nombre_proyecto = models.CharField('Nombre del proyecto',max_length=255)
     objetivo = models.TextField('Objetivo',max_length=255)
     presupuesto = models.CharField('Presupuesto ($)', max_length=15)
-    duracion = models.DecimalField('Duracion (Meses)', max_digits=78, decimal_places=2)
+    duracion = models.CharField('Duracion (Meses)', max_length=100)
     responsables = models.CharField('Responsable', max_length=200)
     proveedor = models.ForeignKey("proveedores.Proveedor", \
         verbose_name='Proveedor', on_delete=models.CASCADE)
