@@ -8,17 +8,16 @@
 
 {% block contenido %}
 <h1 style="margin: auto;">{{ accion }} Proyecto</h1>
-<form method = "post" class="form-control" style="margin: auto; width: 80%;">
+<div style="width: 100%; margin: auto;">
+    {{ form|crispy }}
     {% csrf_token %}
-    <div style="width: 100%; margin: auto;">
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success">
-            {% if accion == 'Nuevo' %}
-                Agregar
-            {% else %}
-                Guardar
-            {% endif %}        
-        </button>
-        <a href="{% url 'lista_proyectos' %}" class="btn btn-danger">Regresar</a>
-</form>
+    <button type="submit" class="btn btn-success">
+        {% if accion == 'Nuevo' %}
+            Agregar
+        {% else %}
+            Guardar
+        {% endif %}        
+    </button>
+    <a href="{% url 'lista_proyectos' %}" class="btn btn-danger">Regresar</a>
+</div>
 {% endblock %}

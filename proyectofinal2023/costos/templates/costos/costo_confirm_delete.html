@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Eliminar costo
+    Eliminar costo
 {% endblock %}
 
 {% block contenido %}
+
 <h1>Eliminar costo</h1>
-<form method="POST" class="form">
-    {% csrf_token %}
-    <p>¿Estas Seguro de querer eliminar el costo del proyecto "{{ object.proyecto }}"?</p>
-    {{ form }}
-    <button type="submit" class="btn btn-danger">Eliminar</button>
-    <a href="{% url 'lista_costos' %}" class="btn btn-warning">Cancelar</a>
-</form>
+
+<div>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <p>¿Estas Seguro de querer eliminar el costo del proyecto "{{ object.proyecto }}"?</p>
+        {{ form }}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'lista_costos' %}" class="btn btn-warning">Cancelar</a>
+    </form>
+</div>
+
 {% endblock %}
