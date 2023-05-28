@@ -21,6 +21,19 @@ post_save.connect(add_user_to_group, sender=User)
 class VRegistro(View):
     def get(self, request):
         form = RegistroForm()
+        form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'
+        form.fields['password1'].widget.attrs['placeholder'] = 'Contraseña'
+        form.fields['password2'].widget.attrs['placeholder'] = 'Confirmar contraseña'
+        form.fields['first_name'].widget.attrs['placeholder'] = 'Nombre(s)'
+        form.fields['last_name'].widget.attrs['placeholder'] = 'Apellido(s)'
+        form.fields['email'].widget.attrs['placeholder'] = 'Correo Electrónico'
+
+        form.fields['username'].widget.attrs['class'] = 'form-control form-control-user'
+        form.fields['password1'].widget.attrs['class'] = 'form-control form-control-user'
+        form.fields['password2'].widget.attrs['class'] = 'form-control form-control-user'
+        form.fields['first_name'].widget.attrs['class'] = 'form-control form-control-user'
+        form.fields['last_name'].widget.attrs['class'] = 'form-control form-control-user'
+        form.fields['email'].widget.attrs['class'] = 'form-control form-control-user'
         return render(request, "registro/registro.html",{'form':form})
 
     def post(self, request):
@@ -58,6 +71,11 @@ def loguear(request):
     else:
         messages.error(request, "Información incorrecta")  
     form = AuthenticationForm()
+    form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'  # Agregar placeholder al campo de nombre de usuario
+    form.fields['password'].widget.attrs['placeholder'] = 'Contraseña'  # Agregar placeholder al campo de contraseña
+
+    form.fields['username'].widget.attrs['class'] = 'form-control form-control-user'  # Agregar clase al campo de nombre de usuario
+    form.fields['password'].widget.attrs['class'] = 'form-control form-control-user'  # Agregar clase al campo de contraseña
     return render(request, "login/login.html",{'form':form})
 
 def reestablecer_contraseña(request):
@@ -72,7 +90,8 @@ def reestablecer_contraseña(request):
                 usuario.save()                                        #No reestablece la contraseña
                 return redirect('iniciar_sesion')
             else:
-                messages.error(request, "Correo no existente")
+                return redirect('iniciar_sesion')
+                #messages.error(request, "Correo no existente")
     else:  
         form = ReestablecerContraseñaForm()
     return render(request, "registro/reestablecer.html",{'form':form})

@@ -23,139 +23,57 @@
 
 </head>
 
-<body id="page-top">
+<body class="bg-gradient-primary">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div class="container">
 
-        <!-- Sidebar -->
-        
-        <!-- End of Sidebar -->
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <div class="col-xl-10 col-lg-12 col-md-9">
 
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="bi bi-arrow-left-circle-fill"></i>
-                    </button>
-
-                    <!-- Topbar Navbar -->
-                    <h1 style="margin: 0 0 0 auto;">Sistema de Gestión de Proyectos del INIFAP</h1>
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2">¿Olvidaste tu contraseña?</h1>
+                                        <p class="mb-4">Lo entendemos, pasan cosas. ¡Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña!</p>
                                     </div>
-                                </form>
+                                    <form class="user" method = "post" action="" style="margin: auto;">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Reenvíar Contraseña</button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="{% url 'Autenticacion' %}">Crea una cuenta</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="{% url 'iniciar_sesion' %}">¿Ya tienes cuenta? Inicia Sesión</a>
+                                    </div>
+                                </div>
                             </div>
-                        </li>
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class=" d-none d-lg-inline text-gray-600 big">{{ user }}</span>
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                {% if user.is_authenticated %}
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    Cerrar Sesion
-                                </a>
-                                {% else %}
-                                <a class="dropdown-item" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'Autenticacion' %}">Registrarse</a>
-                                {% endif %}
-                                
-                            </div>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Contenido -->
-                    <br>
-                    <div class="row">
-                        {% block contenido %}
-                        {% load bootstrap4 %}
-                        {% load crispy_forms_tags %}
-
-                        <form method = "post" action="" style="margin: auto;">
-                            {% csrf_token %}
-                            <div style="width: 75%; margin: auto;">
-                                <h2 style="text-align: center;">Reestablecer contraseña</h2>
-                                {{ form|crispy }}
-                            <button type="submit" class="btn btn-success">Reestablecer contraseña</button>
-                            <div class="text-center">
-                                <a class="small" href="{% url 'iniciar_sesion' %}">¿Ya tienes cuenta? Inicia Sesión</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="{% url 'Autenticacion' %}">Crea una cuenta</a>
-                            </div>
-                        </form>
-
-                        {% endblock %}
+                        </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
-        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quieres cerrar sesión?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    {% block scripts %}
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -172,9 +90,6 @@
     <!-- Page level custom scripts -->
     <script src="{% static 'js/chart-area-demo.js' %}"></script>
     <script src="{% static 'js/chart-pie-demo.js' %}"></script>
-
-    {% block scripts %}
-
     {% endblock %}
 </body>
 </html>

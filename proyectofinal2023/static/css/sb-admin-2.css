@@ -2357,8 +2357,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #1C9D05;
+  border-color: #1C9D05;
 }
 
 .btn-primary:hover {
@@ -3572,8 +3572,8 @@ input[type="button"].btn-block {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #4e73df;
-  background-color: #4e73df;
+  border-color: #1C9D05;
+  background-color: #1C9D05;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -9900,8 +9900,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-image: radial-gradient(circle at 50% -20.71%, #d7a424 0, #c7a616 7.14%, #b4a703 14.29%, #9fa700 21.43%, #88a600 28.57%, #6ea400 35.71%, #4fa100 42.86%, #1b9d05 50%, #009817 57.14%, #009427 64.29%, #009035 71.43%, #008b45 78.57%, #008854 85.71%, #008465 92.86%, #008176 100%);
   background-size: cover;
 }
 
@@ -10861,20 +10860,20 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
+  background-image: url("../img/logo.png");
+  background-position: 2px center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
-  background-position: center;
+  background-image: url("../img/logo.png");
+  background-position: 2px center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
-  background-position: center;
+  background-image: url("../img/logo.png");
+  background-position: 2px center;
   background-size: cover;
 }
 
