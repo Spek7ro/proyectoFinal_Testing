@@ -8,16 +8,14 @@ class FormCosto(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'ID': forms.NumberInput(
-            attrs={'class':'form-class','placeholder':'ID'}
-            ),
+
             'descripcion': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Descripcion'}
             ),
             'costo': forms.NumberInput(
             attrs={'class':'form-class','placeholder':'Costo'}
             ),
-            'proyecto': forms.NumberInput(
+            'proyecto': forms.TextInput(
             attrs={'class':'form-class','placeholder':'Proyecto'}
             ),
         }

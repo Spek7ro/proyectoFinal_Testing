@@ -6,31 +6,15 @@ Lista de Proyectos
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'buscar_proyectos' %}" method="post" id="form" style="margin: auto;">
-    {% csrf_token %}
-        <table class="table">
-            <tr>
-                <td>{{form.num_proyecto}}</td>
-                <td>{{form.nombre_proyecto}}</td>
-                <td>{{form.presupuesto}}</td>
-                <td>{{form.duracion}}</td>
-                <td>{{form.responsables}}</td>
-                <td>{{form.proveedor}}</td>            
-                <td>
-                    <input class="btn btn-success" type="submit" value="Buscar">
-                    <input type="hidden" name="page" id="page">
-                </td>
-            </tr>
-        </table>
-</form>
+
 <div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Proyectos</h4>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <form action="{% url 'eliminar_proyectos' %}" method="post">
+            <form action="{% url 'eliminar_proyectos' %}" method="post">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     {% csrf_token %}
                     <thead>
                         <tr>
@@ -49,30 +33,48 @@ Lista de Proyectos
                             {% endif %}
                         </tr>
                     </thead>
-                </thead>
-                <tbody>
-                    {% for proyecto in object_list %}
-                    <tr>
-                        <td><input type="checkbox" name="{{proyecto.id}}"></td>
-                        <td>{{ proyecto.num_proyecto }}</td>
-                        <td>{{ proyecto.nombre_proyecto}}</td>
-                        <td>{{ proyecto.objetivo}}</td>
-                        <td>{{ proyecto.presupuesto}}</td>
-                        <td>{{ proyecto.duracion}}</td>
-                        <td>{{ proyecto.responsables}}</td>
-                        <td>{{ proyecto.proveedor.razon_social}}</td>
-                        
-                        {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff %}
-                                <td>
-                                    <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                    <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-success btn-sm">Editar</a>
-                                </td>
+                    <tbody>
+                        {% for proyecto in object_list %}
+                            <tr>
+                                <td><input type="checkbox" name="{{proyecto.id}}"></td>
+                                <td>{{ proyecto.num_proyecto }}</td>
+                                <td>{{ proyecto.nombre_proyecto}}</td>
+                                <td>{{ proyecto.objetivo}}</td>
+                                <td>{{ proyecto.presupuesto}}</td>
+                                <td>{{ proyecto.duracion}}</td>
+                                <td>{{ proyecto.responsables}}</td>
+                                <td>{{ proyecto.proveedor.razon_social}}</td>
+                                
+                                {% if request.user.is_authenticated %}
+                                        {% if request.user.is_staff %}
+                                        <td>
+                                            <a href="{% url 'eliminar_proyecto' proyecto.num_proyecto %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                            <a href="{% url 'editar_proyecto' proyecto.num_proyecto %}" class="btn btn-primary btn-sm">Editar</a>
+                                        </td>
+                                    {% endif %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                            <a href="javascript:enviar(1);">&laquo; first</a>
+                            <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
                             {% endif %}
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                            
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            
+                            {% if page_obj.has_next %}
+                            <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
+                            <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </table>
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_staff %}
                         <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
@@ -80,24 +82,6 @@ Lista de Proyectos
                     {% endif %}
                 {% endif %}
             </form>
-            <div class="pagination">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a href="javascript:enviar(1);">&laquo; first</a>
-                        <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
-                    {% endif %}
-            
-                    <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                    </span>
-            
-                    {% if page_obj.has_next %}
-                        <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
-                        <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
-        </table>
         </div>
     </div>
 </div>

@@ -10,7 +10,6 @@ from proyectofinal2023.utils import StaffRequiredMixin
 
 
 class ListaCuentasBancarias(LoginRequiredMixin,ListView):
-    paginate_by = 5
     model = CuentaBancaria
     extra_context = {'form': FiltrosCuenta}
 
@@ -73,9 +72,9 @@ def buscar_cuenta(request):
             #cuentas = cuentas.filter(proyecto__startswith=proyecto)
             #cuentas = cuentas.filter(proyecto__contains=proyecto)
             #cuentas = cuentas.filter(proyecto__icontains=proyecto)
-            cuentas = cuentas.get(proyecto__contains=proyecto)
+            cuentas = cuentas.get(proyecto=proyecto)
         if responsable:
-            cuentas = cuentas.filter(responsable__contains=responsable)
+            cuentas = cuentas.filter(responsable=responsable)
         if limite_presupuestario:
             cuentas = cuentas.filter(limite_presupuestario__contains=limite_presupuestario)
         
@@ -85,12 +84,7 @@ def buscar_cuenta(request):
     else:
         form = FiltrosCuenta()
         
-    paginator = Paginator(cuentas, 5)  
-    page_number = request.POST.get("page")
-    page_obj = paginator.get_page(page_number)
     context = {
-        'object_list': page_obj,
-        'page_obj': page_obj,
         'form': form
     } 
     return render(request, 'cuentas/cuentabancaria_list.html', context)

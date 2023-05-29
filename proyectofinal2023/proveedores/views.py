@@ -12,7 +12,6 @@ from django.http import HttpResponseNotFound
 
 class ListaProveedores(LoginRequiredMixin,ListView):
     model = Proveedor
-    paginate_by = 5
     extra_context = {'form': FiltrosProveedor}
 class NuevoProveedor(StaffRequiredMixin,CreateView):
     model = Proveedor
@@ -105,13 +104,8 @@ def buscar_proveedor(request):
             
     else:
         form = FiltrosProveedor()
-        
-    paginator = Paginator(proveedor, 5)  # Show 25 contacts per page.
-    page_number = request.POST.get("page")
-    page_obj = paginator.get_page(page_number)
+
     context = {
-        'object_list': page_obj,
-        'page_obj': page_obj,
         'form': form
     } 
     return render(request, 'proveedores/proveedor_list.html', context)

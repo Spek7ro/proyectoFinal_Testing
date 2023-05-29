@@ -7,5 +7,4 @@ urlpatterns = [
     path('editar/<int:pk>', views.EditarCosto.as_view(), name = 'editar_costo'),
     path('eliminar/<int:pk>', views.EliminarCosto.as_view(), name = 'eliminar_costo'),
     path('eliminar-costos', views.eliminar_costos, name = 'eliminar_costos'),
-    path('buscar-costo', views.buscar_costos, name = 'buscar_costos'),
 ]

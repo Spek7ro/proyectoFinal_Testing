@@ -16,16 +16,18 @@
 {% endif %}
 <h1 style="margin: auto;">{{ accion }} Costo</h1>
 <div style="width: 100%; margin: auto;">
-    {{ form|crispy }}
-    {% csrf_token %}
-        <button type="submit" class="btn btn-success">
-            {% if accion == 'Nuevo' %}
-                Agregar
-            {% else %}
-                Guardar
-            {% endif %}        
-        </button>
-    <a href="{% url 'lista_costos' %}" class="btn btn-danger">Regresar</a>
+    <form class="form" method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+            <button type="submit" class="btn btn-success">
+                {% if accion == 'Nuevo' %}
+                    Agregar
+                {% else %}
+                    Guardar
+                {% endif %}        
+            </button>
+        <a href="{% url 'lista_costos' %}" class="btn btn-danger">Regresar</a>
+    </form>
 </div>
 {% endblock %}
 

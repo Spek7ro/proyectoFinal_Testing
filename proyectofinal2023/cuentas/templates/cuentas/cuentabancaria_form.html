@@ -9,16 +9,19 @@
 {% block contenido %}
 <h1 style="margin: auto;">{{ accion }} Cuenta bancaria</h1>
 <div style="width: 100%; margin: auto;">
-    {{ form|crispy }}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">
-        {% if accion == 'Nuevo' %}
-            Agregar
-        {% else %}
-            Guardar
-        {% endif %}        
-    </button>
-    <a href="{% url 'lista_cuentas' %}" class="btn btn-danger">Regresar</a>
+    <form class="form" method="post">
+
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">
+            {% if accion == 'Nuevo' %}
+                Agregar
+            {% else %}
+                Guardar
+            {% endif %}        
+        </button>
+        <a href="{% url 'lista_cuentas' %}" class="btn btn-danger">Regresar</a>
+    </form>
 </div>
 {% endblock %}
 

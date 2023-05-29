@@ -7,28 +7,14 @@ Lista de Costos
 
 {% block contenido %}
 
-<form action="{% url 'buscar_costos' %}" method="post" id="form" style="margin: auto;">
-    {% csrf_token %}
-        <table class="table">
-            <tr>
-                <td>{{form.descripcion}}</td>
-                <td>{{form.costo}}</td>
-                <td>{{form.proyecto}}</td>
-                <td>
-                    <input class="btn btn-success" type="submit" value="Buscar">
-                    <input type="hidden" name="page" id="page">
-                </td>
-            </tr>
-        </table>
-</form>
 <div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Costos</h4>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <form action="{% url 'eliminar_costos' %}" method="post">
+            <form action="{% url 'eliminar_costos' %}" method="post">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     {% csrf_token %}
                     <thead>
                         <tr>
@@ -56,39 +42,23 @@ Lista de Costos
                                 {% if request.user.is_staff %}
                                 <td>
                                     <a href="{% url 'eliminar_costo' costo.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                    <a href="{% url 'editar_costo' costo.id %}" class="btn btn-success btn-sm">Editar</a>
+                                    <a href="{% url 'editar_costo' costo.id %}" class="btn btn-primary btn-sm">Editar</a>
                                 </td>
                                 {% endif %}
                             {% endif %}
                             
                         </tr>
                         {% endfor %}
+                    
                     </tbody>
-                    {% if request.user.is_authenticated %}
+                </table>
+                {% if request.user.is_authenticated %}
                     {% if request.user.is_staff %}
-                    <a href="{% url 'agregar_costo' %}" class="btn btn-success btn-sm">Agregar</a>
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <a href="{% url 'agregar_costo' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     {% endif %}
-                    {% endif %}
-                </form>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="javascript:enviar(1);">&laquo; first</a>
-                            <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
-                        {% endif %}
-                
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-                
-                        {% if page_obj.has_next %}
-                            <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
-                            <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
-            </table>
+                {% endif %}
+            </form>
         </div>
     </div>
 </div>

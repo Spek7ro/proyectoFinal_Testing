@@ -6,32 +6,16 @@ Lista de Proveedores
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'buscar_proveedor' %}" method="post" id="form" style="margin: auto;">
-    {% csrf_token %}
-        <table class="table">
-            <tr>
-                <td>{{form.rfc}}</td>
-                <td>{{form.direccion}}</td>
-                <td>{{form.telefono}}</td>
-                <td>{{form.correo}}</td>
-                <td>{{form.municipio}}</td>
-                <td>{{form.estado}}</td>            
-                <td>
-                    <input class="btn btn-success" type="submit" value="Buscar">
-                    <input type="hidden" name="page" id="page">
-                </td>
-            </tr>
-        </table>
-</form>
+
 <div class="card shadow mb-4" style="margin: auto;">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Lista de Proveedores</h4>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <form action="{% url 'eliminar_proveedores' %}" method="post">
-                    {% csrf_token %}
+            <form action="{% url 'eliminar_proveedores' %}" method="post">
+                {% csrf_token %}
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <!-- <th>ID</th> -->
@@ -68,41 +52,22 @@ Lista de Proveedores
                                 {% if request.user.is_staff %}
                             <td>
                                 <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-success btn-sm">Editar</a>
+                                <a href="{% url 'editar_proveedor' proveedor.id %}" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             {% endif %}
                         {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
-                    <!--Crea solo los botones para staff (tecnicos y administradores)-->
-                    {% if request.user.is_authenticated %}
-                        {% if request.user.is_staff %}
-                            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        {% endif %}
+                </table>
+                <!--Crea solo los botones para staff (tecnicos y administradores)-->
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     {% endif %}
-                </form>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="javascript:enviar(1);">&laquo; first</a>
-                            <a href="javascript:enviar({{ page_obj.previous_page_number }});">previous</a>
-                        {% endif %}
-                
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-                
-                        {% if page_obj.has_next %}
-                            <a href="javascript:enviar({{ page_obj.next_page_number }});">next</a>
-                            <a href="javascript:enviar({{ page_obj.paginator.num_pages }});">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
-                
-                        
-                
+                {% endif %}
+            </form>    
         </div>
     </div>
 </div>
