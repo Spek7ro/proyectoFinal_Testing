@@ -65,6 +65,7 @@ Lista de Proveedores
                     {% if request.user.is_staff %}
                         <a href="{% url 'agregar_proveedor' %}" class="btn btn-success btn-sm">Agregar</a>
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <a href="{% url 'reporte_proveedores' %}" class="btn btn-primary btn-sm">Generar PDF</a>
                     {% endif %}
                 {% endif %}
             </form>    

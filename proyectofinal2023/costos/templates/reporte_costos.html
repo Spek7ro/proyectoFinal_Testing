@@ -1,0 +1,28 @@
+{% extends 'reporte_base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#Costo</th>
+                <th>Descripcion</th>
+                <th>Costo</th>
+                <th>Proyecto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for costo in datos_modelo %}
+            <tr>
+                <td>{{ costo.id }}</td>
+                <td>{{ costo.descripcion }}</td>
+                <td>{{ costo.costo }}</td>
+                <td>{{ costo.proyecto }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

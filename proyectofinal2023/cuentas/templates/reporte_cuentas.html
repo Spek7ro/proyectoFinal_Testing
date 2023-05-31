@@ -1,0 +1,28 @@
+{% extends 'reporte_base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#Cuenta</th>
+                <th>Proyecto</th>
+                <th>Responsable</th>
+                <th>Limite presupuestario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cuenta in datos_modelo %}
+            <tr>
+                <td>{{ cuenta.idcuenta }}</td>
+                <td>{{ cuenta.proyecto }}</td>
+                <td>{{ cuenta.responsable }}</td>
+                <td>{{ cuenta.limite_presupuestario }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

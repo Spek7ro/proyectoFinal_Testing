@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'crispy_bootstrap4',
+    'weasyprint',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,4 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_SECURE = True  # Solo si estás utilizando HTTPS
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_HTTPONLY = True
+ULTIMO_NUM_REPORTE = 0  # Valor inicial del último número de reporte generado

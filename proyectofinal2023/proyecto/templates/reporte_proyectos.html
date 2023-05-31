@@ -1,0 +1,34 @@
+{% extends 'reporte_base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NUM Proyecto</th>
+                <th>Nombre Proyecto</th>
+                <th>Objetivo</th>
+                <th>Presupuesto</th>
+                <th>Duracion (Meses)</th>
+                <th>Responsables</th>
+                <th>Proveedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in datos_modelo %}
+            <tr>
+                <td>{{ proveedor.num_proyecto }}</td>
+                <td>{{ proveedor.nombre_proyecto}}</td>
+                <td>{{ proveedor.objetivo}}</td>
+                <td>{{ proveedor.presupuesto}}</td>
+                <td>{{ proveedor.duracion}}</td>
+                <td>{{ proveedor.responsables}}</td>
+                <td>{{ proveedor.proveedor.razon_social}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -79,6 +79,7 @@ Lista de Proyectos
                     {% if request.user.is_staff %}
                         <a href="{% url 'agregar_proyecto' %}" class="btn btn-success btn-sm">Agregar</a>
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <a href="{% url 'reporte_proyectos' %}" class="btn btn-primary btn-sm">Generar PDF</a>
                     {% endif %}
                 {% endif %}
             </form>
