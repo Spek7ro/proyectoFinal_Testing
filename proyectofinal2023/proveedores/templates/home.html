@@ -6,7 +6,34 @@
 {% endblock %}
 
 {% block contenido %}
-    <h1 style="margin: auto;">Bienvenido al Sistema de Gestión de Proyectos del INIFAP</h1>
+
+    <h1 style="margin: auto;">Bienvenido al Sistema de Gestión de Proyectos del INIFAP <hr></h1>
+
+    <div class="my-div">
+        <h5 > <span class="negritas">Sistema de Gestión Financiera de Proyectos</span>  incluye la administración financiera de los proyectos que 
+            se estén desarrollando 
+            dentro del Campo Experimental Zacatecas del INIFAP. <br>
+            La plataforma permite la gestión de los gastos de cada proyecto, la generación de reportes de manera sencilla 
+            y el monitoreo de los recursos ejercidos por los usuarios.
+        </h5>
+    </div>
     
-    <img src="{% static 'img/logo.png' %}" alt="logo INIFAP" width="800PX" style="display: block; margin: auto;">
+    <style>
+        
+        .my-div {
+            padding: 30px;
+            border: 50px;
+            text-align: justify;
+
+        }
+
+        .negritas{
+            font-weight: bold;
+        }
+    </style>
+
+    <img src="{% static 'img/logo.png' %}" alt="logo INIFAP" width="500PX" style="display: block; margin: auto;">
+
+    <img src="{% static 'img/sagarpa_logo.png' %}" alt="logo SAGARPA" width="500PX" style="display: block; margin: auto;">
+
 {% endblock %}
