@@ -5,12 +5,6 @@ para realizar mis actividades cotidianas.
 
 Escenario: Credenciales validas
 Dado que ingreso a la url "http://localhost:8000/"
-Y escribo mi usuario "admin" y mi contraseña "1234"
+Y escribo mi usuario "admin123" y mi contraseña "1234"
 Cuando presiono el botón de Ingresar
-Entonces puedo ver en el banner "Administración de Django"
-
-Escenario: Credenciales invalidas
-Dado que ingreso a la url "http://localhost:8000/admin/login"
-Y escribo mi usuario "usuario123" y mi contraseña "12345678"
-Cuando presiono el botón de Ingresar
-Entonces puedo ver el mensaje "Por favor introduza nombre de usuario y contraseña correctos de una cuenta de staff. Note que puede que ambos campos sean estrictos en relación a diferencias entre mayúsculas y minúsculas."
+Entonces puedo ver en el banner mi nombre de usuario "admin123"

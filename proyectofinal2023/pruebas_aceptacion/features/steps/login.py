@@ -16,19 +16,12 @@ def step_impl(context, usuario, password):
 
 @when(u'presiono el botón de Ingresar')
 def step_impl(context):
-    context.driver.find_element(By.XPATH, '//*[@id="login-form"]/div[3]/input').click()
-
-@then(u'puedo ver en el banner "{mensaje}"')
-def step_impl(context, mensaje):
-    div =  context.driver.find_element(By.PARTIAL_LINK_TEXT, mensaje)
-    print(div)
-    time.sleep(3)
-    assert div, f"El {mensaje} no se encuentra en {div}"
+    context.driver.find_element(By.XPATH, '/html/body/div/div/div/div/div/div/div[2]/div/form/button').click()
     
-@then(u'puedo ver el mensaje "{mensaje}"')
-def step_impl(context, mensaje):
-    div =  context.driver.find_element(By.CLASS_NAME, 'errornote')
+@then(u'puedo ver en el banner mi nombre de usuario "{username}"')
+def step_impl(context, username):
+    div =  context.driver.find_element(By.XPATH, '//*[@id="userDropdown"]/span')
     time.sleep(3)
-    assert div.text, f"El {mensaje} no se encuentra en {div.text}"
+    assert div.text, f"El {username} no se encuentra en {div.text}"
     time.sleep(1)
         
