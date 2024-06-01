@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proyecto',
             name='duracion',
-            field=models.CharField(max_length=100, verbose_name='Duracion (Meses)'),
+            field=models.CharField(
+                max_length=100, verbose_name='Duracion (Meses)'),
         ),
     ]

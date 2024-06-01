@@ -19,12 +19,20 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='proyecto',
             name='proveedor',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='proveedores.proveedor', verbose_name='Proveedor'),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='proveedores.proveedor',
+                verbose_name='Proveedor'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='proyecto',
             name='num_proyecto',
-            field=models.CharField(max_length=8, primary_key=True, serialize=False, verbose_name='NUM Proyecto'),
+            field=models.CharField(
+                max_length=8,
+                primary_key=True,
+                serialize=False,
+                verbose_name='NUM Proyecto'),
         ),
     ]

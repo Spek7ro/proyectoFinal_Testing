@@ -13,6 +13,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proyecto',
             name='duracion',
-            field=models.DecimalField(decimal_places=0, max_digits=1, verbose_name='Duracion (Meses)'),
+            field=models.DecimalField(
+                decimal_places=0,
+                max_digits=1,
+                verbose_name='Duracion (Meses)'),
         ),
     ]

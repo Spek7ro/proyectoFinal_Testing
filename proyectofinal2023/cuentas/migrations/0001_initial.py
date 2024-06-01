@@ -15,17 +15,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Proyecto',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
             name='CuentaBancaria',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('responsable', models.CharField(max_length=100)),
-                ('limite_presupuestario', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('proyecto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cuentas.proyecto')),
+                ('limite_presupuestario', models.DecimalField(
+                    decimal_places=2, max_digits=10)),
+                ('proyecto', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='cuentas.proyecto')),
             ],
         ),
     ]

@@ -15,6 +15,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='costo',
             name='proyecto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='proyecto.proyecto', verbose_name='Proyecto'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='proyecto.proyecto',
+                verbose_name='Proyecto'),
         ),
     ]

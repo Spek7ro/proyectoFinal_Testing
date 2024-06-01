@@ -16,10 +16,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Costos',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('descripcion', models.CharField(max_length=100)),
-                ('costo', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('presupuesto', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='proyecto.proyecto', verbose_name='Presupuesto')),
+                ('id',
+                 models.BigAutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('descripcion',
+                 models.CharField(
+                     max_length=100)),
+                ('costo',
+                 models.DecimalField(
+                     decimal_places=2,
+                     max_digits=10)),
+                ('presupuesto',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.DO_NOTHING,
+                     to='proyecto.proyecto',
+                     verbose_name='Presupuesto')),
             ],
         ),
     ]

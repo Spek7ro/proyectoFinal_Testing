@@ -3,6 +3,8 @@ from django.dispatch import receiver
 from .models import Costo
 
 # Función de señal que se ejecutará antes de eliminar un objeto Costo
+
+
 @receiver(pre_delete, sender=Costo)
 def sumar_costo_al_presupuesto(sender, instance, **kwargs):
     proyecto = instance.proyecto

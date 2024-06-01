@@ -17,7 +17,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cuentabancaria',
             name='idcuenta',
-            field=models.CharField(default=1, max_length=8, primary_key=True, serialize=False, verbose_name='ID cuenta'),
+            field=models.CharField(
+                default=1,
+                max_length=8,
+                primary_key=True,
+                serialize=False,
+                verbose_name='ID cuenta'),
             preserve_default=False,
         ),
     ]

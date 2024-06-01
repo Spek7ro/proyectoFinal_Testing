@@ -13,12 +13,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proyecto',
             name='duracion',
-            field=models.DecimalField(decimal_places=2, max_digits=78, verbose_name='Duracion (Meses)'),
+            field=models.DecimalField(
+                decimal_places=2, max_digits=78,
+                verbose_name='Duracion (Meses)'),
         ),
         migrations.AlterField(
             model_name='proyecto',
             name='nombre_proyecto',
-            field=models.CharField(max_length=255, verbose_name='Nombre del proyecto'),
+            field=models.CharField(
+                max_length=255, verbose_name='Nombre del proyecto'),
         ),
         migrations.AlterField(
             model_name='proyecto',
@@ -28,7 +31,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proyecto',
             name='presupuesto',
-            field=models.CharField(max_length=15, verbose_name='Presupuesto ($)'),
+            field=models.CharField(
+                max_length=15, verbose_name='Presupuesto ($)'),
         ),
         migrations.AlterField(
             model_name='proyecto',

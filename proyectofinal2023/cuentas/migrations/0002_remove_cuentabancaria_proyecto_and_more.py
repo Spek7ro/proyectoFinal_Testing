@@ -19,7 +19,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cuentabancaria',
             name='proveedor',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='proyecto.proyecto', verbose_name='Proyecto'),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='proyecto.proyecto',
+                verbose_name='Proyecto'),
             preserve_default=False,
         ),
         migrations.DeleteModel(
