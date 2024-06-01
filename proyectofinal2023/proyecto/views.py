@@ -1,19 +1,16 @@
-from django.conf import settings
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import ListView
+from django.conf import settings  # type: ignore
+from django.shortcuts import render, redirect  # type: ignore
+from django.urls import reverse_lazy  # type: ignore
+from django.views.generic import ListView  # type: ignore
 from .models import Proyecto
-from django.db import models
-from costos.models import Costo
-from django.contrib import messages
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView  # type: ignore
+from django.views.generic.edit import UpdateView, DeleteView  # type: ignore
 from .forms import FormProyecto, FormProyectoEditar, FiltrosProyecto
-from django.core.paginator import Paginator
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin  # type: ignore
 from proyectofinal2023.utils import StaffRequiredMixin
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from weasyprint import HTML, CSS
+from django.http import HttpResponse  # type: ignore
+from django.template.loader import render_to_string  # type: ignore
+from weasyprint import HTML, CSS  # type: ignore
 import datetime
 
 

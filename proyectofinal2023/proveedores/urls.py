@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path  # type: ignore
 from proveedores import views
 
 urlpatterns = [

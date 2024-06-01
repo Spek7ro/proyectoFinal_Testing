@@ -1,73 +1,71 @@
 from behave import given, when, then
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
 
 
 @given(u'presiono el botón de Ingresar')
-def step_impl(context):
+def step_impl1(context):
     context.driver.find_element(
         By.XPATH,
         '/html/body/div/div/div/div/div/div/div[2]/div/form/button').click()
 
 
 @given(u'le doy clik en el enlace proveedores')
-def step_impl(context):
+def step_impl2(context):
     context.driver.find_element(By.LINK_TEXT, 'Proveedores').click()
 
 
 @given(u'luego clik en el boton de Agregar')
-def step_impl(context):
+def step_impl3(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="collapseTwo"]/div/a[2]').click()
 
 
 @given(u'escribo el RFC del proveedor "{rfc}"')
-def step_impl(context, rfc):
+def step_impl4(context, rfc):
     context.driver.find_element(By.NAME, 'rfc').send_keys(rfc)
 
 
 @given(u'escribo la razon social del proveedor "{razon_social}"')
-def step_impl(context, razon_social):
+def step_impl5(context, razon_social):
     context.driver.find_element(
         By.NAME, 'razon_social').send_keys(razon_social)
 
 
 @given(u'escribo la dirección del proveedor "{direccion}"')
-def step_impl(context, direccion):
+def step_impl6(context, direccion):
     context.driver.find_element(By.NAME, 'direccion').send_keys(direccion)
 
 
 @given(u'escribo el telefono del proveedor "{telefono}"')
-def step_impl(context, telefono):
+def step_impl7(context, telefono):
     context.driver.find_element(By.NAME, 'telefono').send_keys(telefono)
 
 
 @given(u'escribo el correo del proveedor "{correo}"')
-def step_impl(context, correo):
+def step_impl8(context, correo):
     context.driver.find_element(By.NAME, 'correo').send_keys(correo)
 
 
 @given(u'selecciono el estado del proveedor "{estado}"')
-def step_impl(context, estado):
+def step_impl9(context, estado):
     context.driver.find_element(By.NAME, 'estado').send_keys(estado)
 
 
 @given(u'selecciono el municipio del proveedor "{municipio}"')
-def step_impl(context, municipio):
+def step_impl10(context, municipio):
     context.driver.find_element(By.NAME, 'municipio').send_keys(municipio)
 
 
 @when(u'presiono el boton Agregar')
-def step_impl(context):
+def step_impl11(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="content"]/div/div/div/form/button').click()
     time.sleep(2)
 
 
 @then(u'puedo ver el RFC del proveedor "{rfc}" en la lista de proveedores')
-def step_impl(context, rfc):
+def step_impl12(context, rfc):
     proveedores = context.driver.find_elements(
         By.XPATH,
         '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')

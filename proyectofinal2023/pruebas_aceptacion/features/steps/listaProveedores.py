@@ -1,18 +1,16 @@
-from behave import given, when, then
-from selenium import webdriver
+from behave import given, then
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
 
 
 @given(u'luego clik en el boton de Lista')
-def step_impl(context):
+def step_impl1(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="collapseTwo"]/div/a[1]').click()
 
 
 @then(u'puedo ver el mensaje "{mensaje}"')
-def step_impl(context, mensaje):
+def step_impl2(context, mensaje):
     div = context.driver.find_element(
         By.XPATH, '//*[@id="content"]/div/div/div/div[1]/h4')
     time.sleep(3)

@@ -1,5 +1,4 @@
-from django.db import models
-from proyecto.models import Proyecto
+from django.db import models  # type: ignore
 
 
 class CuentaBancaria(models.Model):

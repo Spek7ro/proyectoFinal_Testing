@@ -1,9 +1,6 @@
-from django.apps import AppConfig
+from django.apps import AppConfig  # type: ignore
 
 
 class CostoConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'costos'
-
-    def ready(self):
-        import costos.signals

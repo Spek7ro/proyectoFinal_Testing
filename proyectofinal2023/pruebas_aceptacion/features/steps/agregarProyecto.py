@@ -1,58 +1,55 @@
-from behave import given, when, then
-from selenium import webdriver
+from behave import given, then
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-import time
 
 
 @given(u'luego clik en el boton de agregar proyecto')
-def step_impl(context):
+def step_impl1(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="collapseUtilities"]/div/a[2]').click()
 
 
 @given(u'escribo el numero del proyecto "{numero_proyecto}"')
-def step_impl(context, numero_proyecto):
+def step_impl2(context, numero_proyecto):
     context.driver.find_element(
         By.NAME, 'num_proyecto').send_keys(numero_proyecto)
 
 
 @given(u'escribo el nombre del proyecto "{nombre_proyecto}"')
-def step_impl(context, nombre_proyecto):
+def step_impl3(context, nombre_proyecto):
     context.driver.find_element(
         By.NAME, 'nombre_proyecto').send_keys(nombre_proyecto)
 
 
 @given(u'escribo el objetivo del proyecto "{objetivo_proyecto}"')
-def step_impl(context, objetivo_proyecto):
+def step_impl4(context, objetivo_proyecto):
     context.driver.find_element(
         By.NAME, 'objetivo').send_keys(objetivo_proyecto)
 
 
 @given(u'escribo el presupuesto del proyecto "{presupuesto}"')
-def step_impl(context, presupuesto):
+def step_impl5(context, presupuesto):
     context.driver.find_element(By.NAME, 'presupuesto').send_keys(presupuesto)
 
 
 @given(u'escribo la duracion del proyecto "{duracion}"')
-def step_impl(context, duracion):
+def step_impl6(context, duracion):
     context.driver.find_element(By.NAME, 'duracion').send_keys(duracion)
 
 
 @given(u'escribo el responsable del proyecto "{responsable}"')
-def step_impl(context, responsable):
+def step_impl7(context, responsable):
     context.driver.find_element(By.NAME, 'responsables').send_keys(responsable)
 
 
 @given(u'selecciono al proveedor del proyecto "{proveedor}"')
-def step_impl(context, proveedor):
+def step_impl8(context, proveedor):
     context.driver.find_element(By.NAME, 'proveedor').send_keys(proveedor)
 
 
 @then(
     u'puedo ver el nombre del proyecto "{nombre_proyecto}" '
     u'en la lista de proyectos')
-def step_impl(context, nombre_proyecto):
+def step_impl9(context, nombre_proyecto):
     proyectos = context.driver.find_elements(
         By.XPATH,
         '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')

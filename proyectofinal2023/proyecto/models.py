@@ -1,5 +1,4 @@
-from django.db import models
-from proveedores.models import Proveedor
+from django.db import models  # type: ignore
 
 
 class Proyecto(models.Model):

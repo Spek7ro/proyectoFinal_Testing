@@ -1,18 +1,18 @@
-from django.conf import settings
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Proveedor, Municipio, Estado
+from django.conf import settings  # type: ignore
+from django.shortcuts import render, redirect  # type: ignore
+from django.urls import reverse_lazy  # type: ignore
+from django.views.generic import ListView, TemplateView  # type: ignore
+from django.views.generic.edit import CreateView, DeleteView  # type: ignore
+from django.views.generic.edit import UpdateView  # type: ignore
+from sympy import Q  # type: ignore
+from .models import Proveedor, Municipio
 from .forms import FormProveedor, FormProveedorEditar, FiltrosProveedor
-from django.http import JsonResponse
-from django.core.paginator import Paginator
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse  # type: ignore
+from django.contrib.auth.mixins import LoginRequiredMixin  # type: ignore
 from proyectofinal2023.utils import StaffRequiredMixin
-from django.http import HttpResponseNotFound
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from weasyprint import HTML, CSS
+from django.http import HttpResponse  # type: ignore
+from django.template.loader import render_to_string  # type: ignore
+from weasyprint import HTML, CSS  # type: ignore
 import datetime
 
 
@@ -86,44 +86,47 @@ def buscar_municipios(request):
     return JsonResponse({'error': 'Parametro Invalido'}, safe=False)
 
 
+def obtener_filtros(request):
+    filtros = {
+        'rfc': request.POST.get('rfc', None),
+        'razon_social': request.POST.get('razon_social', None),
+        'direccion': request.POST.get('direccion', None),
+        'telefono': request.POST.get('telefono', None),
+        'correo': request.POST.get('correo', None),
+        'estado': request.POST.get('estado', None),
+        'municipio': request.POST.get('municipio', None),
+    }
+    return filtros
+
+
+def filtrar_proveedor(proveedor, filtros):
+    """Aplica filtros al queryset de proveedores."""
+    for filtro, valor in filtros.items():
+        if valor:
+            proveedor = aplicar_filtro(proveedor, filtro, valor)
+    return proveedor
+
+
+def aplicar_filtro(proveedor, filtro, valor):
+    """Aplica un filtro específico al queryset de proveedores."""
+    if filtro == 'rfc':
+        return proveedor.filter(
+            Q(rfc__contains=valor) | Q(rfc__icontains=valor)
+        )
+    return proveedor.filter(**{filtro: valor})
+
+
 def buscar_proveedor(request):
     proveedor = Proveedor.objects.all().order_by('rfc', 'estado')
 
     if request.method == 'POST':
-
         form = FiltrosProveedor(request.POST)
-        rfc = request.POST.get('rfc', None)
-        razon_social = request.POST.get('razon_social', None)
-        direccion = request.POST.get('direccion', None)
-        telefono = request.POST.get('telefono', None)
-        correo = request.POST.get('correo', None)
-        estado = request.POST.get('estado', None)
-        municipio = request.POST.get('municipio', None)
-
-        if rfc:
-            # proveedor = proveedor.filter(rfc__startswith=rfc)
-            proveedor = proveedor.filter(rfc__contains=rfc)
-            proveedor = proveedor.filter(rfc__icontains=rfc)
-            # proveedor = proveedor.get(rfc=rfc)
-        if razon_social:
-            proveedor = proveedor.filter(razon_social=razon_social)
-        if direccion:
-            proveedor = proveedor.filter(direccion=direccion)
-        if telefono:
-            proveedor = proveedor.filter(telefono=telefono)
-        if correo:
-            proveedor = proveedor.filter(correo=correo)
-        if estado:
-            proveedor = proveedor.filter(estado=estado)
-        if municipio:
-            proveedor = proveedor.filter(municipio=municipio)
-
+        filtros = obtener_filtros(request)
+        proveedor = filtrar_proveedor(proveedor, filtros)
     else:
         form = FiltrosProveedor()
 
-    context = {
-        'form': form
-    }
+    context = {'form': form, 'proveedores': proveedor}
     return render(request, 'proveedores/proveedor_list.html', context)
 
 

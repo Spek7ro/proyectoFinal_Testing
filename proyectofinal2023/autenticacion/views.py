@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
-from django.views.generic import View
-from django.contrib.auth import login, logout, authenticate
-from django.contrib import messages
+from django.shortcuts import render, redirect  # type: ignore
+from django.views.generic import View  # type: ignore
+from django.contrib.auth import login, logout, authenticate  # type: ignore
+from django.contrib import messages  # type: ignore
 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm  # type: ignore
 from .forms import RegistroForm, ReestablecerContraseñaForm
 
-from django.contrib.auth.models import User, Group
-from django.db.models.signals import post_save
+from django.contrib.auth.models import User, Group  # type: ignore
+from django.db.models.signals import post_save  # type: ignore
 
 
 def add_user_to_group(sender, instance, created, **kwargs):
