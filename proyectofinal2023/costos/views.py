@@ -42,8 +42,8 @@ class NuevoCosto(StaffRequiredMixin, CreateView):
                 self.request,
                 f"El presupuesto del proyecto '{proyecto}' \
                     ha superado el límite. ¡Está en negativo! \
-                    Por lo tanto, el gasto que quiere registrar ('{
-                    descripcion}'), no se ha guardado."
+                    Por lo tanto, el gasto que quiere registrar ('\
+                    {descripcion}'), no se ha guardado."
             )
             return super().form_invalid(form)
         else:
