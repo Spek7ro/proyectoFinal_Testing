@@ -12,11 +12,9 @@ from django.db.models.signals import post_save  # type: ignore
 
 def add_user_to_group(sender, instance, created, **kwargs):
     if created:
-        group = Group.objects.get(name='Investigadores')
+        group, created = Group.objects.get(name='Investigadores')
         instance.groups.add(group)
-
-
-post_save.connect(add_user_to_group, sender=User)
+    post_save.connect(add_user_to_group, sender=User)
 
 
 class VRegistro(View):
@@ -103,15 +101,18 @@ def reestablecer_contraseña(request):
         form = ReestablecerContraseñaForm(request.POST)
         if form.is_valid():
             correo = form.cleaned_data.get("email")
-            usuario = authenticate(email=correo)
-            if usuario is not None:
-                nuevaContraseña = form.cleaned_data.get("password1")
-                usuario.set_password(nuevaContraseña)
-                usuario.save()  # No reestablece la contraseña
-                return redirect('iniciar_sesion')
-            else:
-                return redirect('iniciar_sesion')
-                # messages.error(request, "Correo no existente")
+            try:
+                usuario = User.objects.get(email=correo)
+                nueva_contraseña = form.cleaned_data.get("password1")
+                usuario.set_password(nueva_contraseña)
+                usuario.save()
+                return redirect('iniciar_sesion')  # Redirigir en caso de éxito
+            except User.DoesNotExist:
+                messages.error(request, "Correo no existente")
+                return redirect('reestablecer_contra')  # Redirigir en caso de correo no existente
+        else:
+            # Redirigir si el formulario no es válido
+            return redirect('reestablecer_contra')
     else:
         form = ReestablecerContraseñaForm()
     return render(request, "registro/reestablecer.html", {'form': form})
