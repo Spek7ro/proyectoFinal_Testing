@@ -26,4 +26,5 @@ urlpatterns = [
         'pdf/',
         views.generar_reporte,
         name='reporte_proyectos'),
+        path('buscar-proyecto/', views.buscar_proyecto, name='buscar_proyecto'),
 ]

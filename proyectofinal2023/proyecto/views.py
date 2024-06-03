@@ -12,12 +12,14 @@ from django.http import HttpResponse  # type: ignore
 from django.template.loader import render_to_string  # type: ignore
 from weasyprint import HTML, CSS  # type: ignore
 import datetime
+from django.db.models import Q
+from django.shortcuts import render
 
 
 class ListaProyectos(LoginRequiredMixin, ListView):
     model = Proyecto
+    template_name = 'proyecto/proyecto_list.html'  # Ruta al template donde se renderizarán los resultados
     extra_context = {'form': FiltrosProyecto}
-
 
 class NuevoProyecto(StaffRequiredMixin, CreateView):
     model = Proyecto
@@ -66,35 +68,29 @@ class EditarProyecto(StaffRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
 
+
 def buscar_proyecto(request):
-    proyecto = (
-        Proyecto.objects.all().order_by(
-            'num_proyecto', 'nombre_proyecto'))
+    proyectos = Proyecto.objects.all()
 
     if request.method == 'POST':
+        nombre_proyecto = request.POST.get('nombre_proyecto')
+        responsables = request.POST.get('responsables')
+        proveedor = request.POST.get('proveedor')
 
-        form = FiltrosProyecto(request.POST)
-        # num_proyecto = request.POST.get('num_proyecto',None)
-        nombre_proyecto = request.POST.get('nombre_proyecto', None)
-        # objetivo = request.POST.get('objetivo',None)
-        # presupuesto = request.POST.get('presupuesto',None)
-        # duracion = request.POST.get('duracion',None)
-        responsables = request.POST.get('responsables', None)
-        proveedor = request.POST.get('proveedor', None)
         if nombre_proyecto:
-            proyecto = proyecto.filter(nombre_proyecto=nombre_proyecto)
+            proyectos = proyectos.filter(nombre_proyecto=nombre_proyecto)
         if responsables:
-            proyecto = proyecto.filter(responsables=responsables)
+            proyectos = proyectos.filter(responsables=responsables)
         if proveedor:
-            proyecto = proyecto.filter(proveedor=proveedor)
-
+            proyectos = proyectos.filter(proveedor=proveedor)
+        
     else:
-        form = FiltrosProyecto()
+        # Si no hay filtros aplicados, simplemente devolvemos todos los proyectos
+        pass
 
-    context = {
-        'form': form
-    }
-    return render(request, 'proyecto/proyecto_list.html', context)
+    return render(request, 'proyecto/proyecto_list.html', {'proyectos': proyectos})
+
+
 
 
 def generar_reporte(request):

@@ -14,6 +14,8 @@ from django.http import HttpResponse  # type: ignore
 from django.template.loader import render_to_string  # type: ignore
 from weasyprint import HTML, CSS  # type: ignore
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ListaProveedores(LoginRequiredMixin, ListView):
@@ -21,15 +23,16 @@ class ListaProveedores(LoginRequiredMixin, ListView):
     extra_context = {'form': FiltrosProveedor}
 
 
-class NuevoProveedor(StaffRequiredMixin, CreateView):
+class NuevoProveedor(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Proveedor
     form_class = FormProveedor
     extra_context = {'accion': 'Nuevo'}
-    success_url = reverse_lazy('lista_proveedores')
+    success_url = reverse_lazy('agregar_proveedor')
 
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            return redirect('home')
+            # Redirige 
+            return redirect('agregar_proveedor') 
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -129,7 +132,7 @@ def buscar_proveedor(request):
     context = {'form': form, 'proveedores': proveedor}
     return render(request, 'proveedores/proveedor_list.html', context)
 
-
+@login_required
 def generar_reporte(request):
     # Obtén la fecha actual
     fecha_actual = datetime.date.today()
