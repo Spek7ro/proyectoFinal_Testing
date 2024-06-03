@@ -4,7 +4,6 @@ from django.urls import reverse_lazy  # type: ignore
 from django.views.generic import ListView, TemplateView  # type: ignore
 from django.views.generic.edit import CreateView, DeleteView  # type: ignore
 from django.views.generic.edit import UpdateView  # type: ignore
-from sympy import Q  # type: ignore
 from .models import Proveedor, Municipio
 from .forms import FormProveedor, FormProveedorEditar, FiltrosProveedor
 from django.http import JsonResponse  # type: ignore
@@ -27,12 +26,12 @@ class NuevoProveedor(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Proveedor
     form_class = FormProveedor
     extra_context = {'accion': 'Nuevo'}
-    success_url = reverse_lazy('agregar_proveedor')
+    success_url = reverse_lazy('lista_proveedores')
 
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
             # Redirige 
-            return redirect('agregar_proveedor') 
+            return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
 
