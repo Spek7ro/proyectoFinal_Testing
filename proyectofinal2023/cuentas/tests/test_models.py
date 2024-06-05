@@ -8,9 +8,10 @@ from django.core.exceptions import ValidationError
 class TestCuentaBancariaModel(TestCase):
     def setUp(self):
         self.estado = Estado.objects.create(nombre='Estado de México')
-        
-        self.municipio = Municipio.objects.create(nombre='Municipio de México', estado=self.estado)
-               
+
+        self.municipio = Municipio.objects.create(
+            nombre='Municipio de México', estado=self.estado)
+
         self.proveedor = Proveedor.objects.create(
             rfc='1234567890123',
             razon_social='Proveedora',
@@ -49,7 +50,6 @@ class TestCuentaBancariaModel(TestCase):
             limite_presupuestario=30000.00,
             proyecto=self.proyecto
         )
-        # Intentar crear otra cuenta bancaria con el mismo idcuenta debería lanzar una excepción
         with self.assertRaises(Exception):
             CuentaBancaria.objects.create(
                 idcuenta='C002',
@@ -66,7 +66,7 @@ class TestCuentaBancariaModel(TestCase):
             proyecto=self.proyecto
         )
         self.assertEqual(cuenta_bancaria.proyecto, self.proyecto)
-        
+
     def test_limite_presupuestario_positivo(self):
         cuenta_bancaria = CuentaBancaria(
             idcuenta='C004',

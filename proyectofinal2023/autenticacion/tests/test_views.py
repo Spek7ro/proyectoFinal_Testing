@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.forms import AuthenticationForm
+
 
 class ViewTests(TestCase):
     def setUp(self):
@@ -81,7 +81,8 @@ class ViewTests(TestCase):
             'password1': 'newpassword123',
             'password2': 'newpassword123'
         }
-        response = self.client.post(reverse('reestablecer_contra'), data=form_data)
+        response = self.client.post(
+            reverse('reestablecer_contra'), data=form_data)
         self.assertEqual(response.status_code, 302)  # Should redirect
         self.user.refresh_from_db()
         self.assertTrue(self.user.check_password('newpassword123'))
@@ -92,7 +93,8 @@ class ViewTests(TestCase):
             'password1': 'newpassword123',
             'password2': 'newpassword123'
         }
-        response = self.client.post(reverse('reestablecer_contra'), data=form_data)
+        response = self.client.post(
+            reverse('reestablecer_contra'), data=form_data)
         self.assertEqual(response.status_code, 302)  # Should redirect
         self.user.refresh_from_db()
         self.assertFalse(self.user.check_password('newpassword123'))

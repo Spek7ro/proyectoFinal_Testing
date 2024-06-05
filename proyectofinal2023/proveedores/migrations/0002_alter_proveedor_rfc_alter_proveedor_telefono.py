@@ -14,7 +14,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proveedor',
             name='rfc',
-            field=models.CharField(max_length=13, validators=[proveedores.models.validate_rfc], verbose_name='R.F.C'),
+            field=models.CharField(
+                max_length=13,
+                validators=[proveedores.models.validate_rfc],
+                verbose_name='R.F.C'),
         ),
         migrations.AlterField(
             model_name='proveedor',

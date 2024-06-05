@@ -5,12 +5,14 @@ from costos.models import Costo
 from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
 
+
 class TestCostoModel(TestCase):
     def setUp(self):
         self.estado = Estado.objects.create(nombre='Estado de México')
-        
-        self.municipio = Municipio.objects.create(nombre='Municipio de México', estado=self.estado)
-            
+
+        self.municipio = Municipio.objects.create(
+            nombre='Municipio de México', estado=self.estado)
+
         proveedor = Proveedor.objects.create(
             rfc='1234567890123',
             razon_social='Proveedora',
@@ -29,7 +31,7 @@ class TestCostoModel(TestCase):
             responsables='Responsable de Prueba',
             proveedor=proveedor
         )
-        
+
     def test_crear_costo(self):
         costo = Costo.objects.create(
             descripcion='Costo de Prueba',

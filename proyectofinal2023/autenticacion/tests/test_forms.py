@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from autenticacion.forms import RegistroForm, ReestablecerContraseñaForm
 from django.contrib.auth.models import Group
 
+
 class TestRegistroForm(TestCase):
 
     def setUp(self):
@@ -34,7 +35,8 @@ class TestRegistroForm(TestCase):
 
     def test_registro_form_existing_user(self):
         User.objects.create_user(
-            username='testuser', email='testuser@example.com', password='testpassword123')
+            username='testuser', email='testuser@example.com',
+            password='testpassword123')
         form = RegistroForm(data=self.user_data)
 
         self.assertFalse(form.is_valid())
@@ -44,9 +46,10 @@ class TestReestablecerContraseñaForm(TestCase):
 
     def setUp(self):
         Group.objects.get_or_create(name='Investigadores')
-        
+
         self.user = User.objects.create_user(
-            username='testuser', email='testuser@example.com', password='testpassword123')
+            username='testuser', email='testuser@example.com',
+            password='testpassword123')
         self.form_data = {
             'email': 'testuser@example.com',
             'password1': 'newpassword123',
@@ -69,4 +72,3 @@ class TestReestablecerContraseñaForm(TestCase):
         data['password2'] = 'differentpassword'  # Password mismatch
         form = ReestablecerContraseñaForm(data=data)
         self.assertFalse(form.is_valid())
-

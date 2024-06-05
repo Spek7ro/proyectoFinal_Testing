@@ -19,7 +19,8 @@ def step_impl(context):
 @given(u'luego doy clik en el boton de generar reporte pdf')
 def step_impl(context):
     context.driver.find_element(
-        By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/form/a[2]').click()
+        By.XPATH,
+        '//*[@id="content"]/div/div/div/div[2]/div/form/a[2]').click()
     time.sleep(2)
 
 
@@ -33,7 +34,6 @@ def step_impl(context, ruta, nombre):
 @then(u'ingreso a la url "{ruta}" y puedo ver el pdf')
 def step_impl(context, ruta):
     assert os.path.exists(ruta), f"El archivo PDF no se encuentra en {ruta}"
-    # Abrir el archivo pdf en el navegador 
+    # Abrir el archivo pdf en el navegador
     context.driver.get(f'file://{ruta}')
     time.sleep(2)
-   

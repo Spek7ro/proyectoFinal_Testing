@@ -70,6 +70,6 @@ def step_impl12(context, rfc):
         '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
     for proveedor in proveedores:
         if proveedor.find_element(By.XPATH, 'td[1]').text == rfc:
-            assert True, f"El RFC {rfc
-                        } no se encuentra en la lista de proveedores"
+            assert True, f"El RFC {rfc}\
+            no se encuentra en la lista de proveedores"
     time.sleep(3)

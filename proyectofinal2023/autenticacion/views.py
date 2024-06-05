@@ -109,7 +109,8 @@ def reestablecer_contraseña(request):
                 return redirect('iniciar_sesion')  # Redirigir en caso de éxito
             except User.DoesNotExist:
                 messages.error(request, "Correo no existente")
-                return redirect('reestablecer_contra')  # Redirigir en caso de correo no existente
+                # Redirigir en caso de correo no existente
+                return redirect('reestablecer_contra')
         else:
             # Redirigir si el formulario no es válido
             return redirect('reestablecer_contra')

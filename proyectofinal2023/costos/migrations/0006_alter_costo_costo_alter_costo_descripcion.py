@@ -14,11 +14,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='costo',
             name='costo',
-            field=models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(0)]),
+            field=models.DecimalField(
+                decimal_places=2, max_digits=10,
+                validators=[django.core.validators.MinValueValidator(0)]),
         ),
         migrations.AlterField(
             model_name='costo',
             name='descripcion',
-            field=models.CharField(max_length=255, validators=[django.core.validators.MaxLengthValidator(255)]),
+            field=models.CharField(
+                max_length=255,
+                validators=[django.core.validators.MaxLengthValidator(255)]),
         ),
     ]

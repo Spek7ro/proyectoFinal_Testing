@@ -14,11 +14,18 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='proyecto',
             name='duracion',
-            field=models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(999)], verbose_name='Duracion (Meses)'),
+            field=models.PositiveIntegerField(
+                validators=[django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(999)],
+                verbose_name='Duracion (Meses)'),
         ),
         migrations.AlterField(
             model_name='proyecto',
             name='presupuesto',
-            field=models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(999999999)], verbose_name='Presupuesto ($)'),
+            field=models.IntegerField(
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(999999999)],
+                verbose_name='Presupuesto ($)'),
         ),
     ]

@@ -18,8 +18,10 @@ from django.shortcuts import render
 
 class ListaProyectos(LoginRequiredMixin, ListView):
     model = Proyecto
-    template_name = 'proyecto/proyecto_list.html'  # Ruta al template donde se renderizarán los resultados
+    # Ruta al template donde se renderizarán los resultados
+    template_name = 'proyecto/proyecto_list.html'
     extra_context = {'form': FiltrosProyecto}
+
 
 class NuevoProyecto(StaffRequiredMixin, CreateView):
     model = Proyecto
@@ -68,7 +70,6 @@ class EditarProyecto(StaffRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-
 def buscar_proyecto(request):
     proyectos = Proyecto.objects.all()
 
@@ -83,14 +84,12 @@ def buscar_proyecto(request):
             proyectos = proyectos.filter(responsables=responsables)
         if proveedor:
             proyectos = proyectos.filter(proveedor=proveedor)
-        
+
     else:
-        # Si no hay filtros aplicados, simplemente devolvemos todos los proyectos
         pass
-
-    return render(request, 'proyecto/proyecto_list.html', {'proyectos': proyectos})
-
-
+    return render(
+        request, 'proyecto/proyecto_list.html',
+        {'proyectos': proyectos})
 
 
 def generar_reporte(request):

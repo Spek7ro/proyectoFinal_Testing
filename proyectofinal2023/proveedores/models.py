@@ -1,9 +1,11 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
 def validate_rfc(value):
     if ' ' in value:
         raise ValidationError('El RFC no puede contener espacios en blanco.')
+
 
 class Proveedor(models.Model):
     rfc = models.CharField('R.F.C', max_length=13, validators=[validate_rfc])

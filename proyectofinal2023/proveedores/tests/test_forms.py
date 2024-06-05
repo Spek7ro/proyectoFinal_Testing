@@ -3,13 +3,15 @@ from proyecto.forms import FormProyecto, FormProyectoEditar, FiltrosProyecto
 from proyecto.models import Proyecto
 from proveedores.models import Proveedor, Estado, Municipio
 
+
 class TestFormProyecto(TestCase):
 
     def setUp(self):
         self.estado = Estado.objects.create(nombre='Estado de México')
-        
-        self.municipio = Municipio.objects.create(nombre='Municipio de México', estado=self.estado)
-        
+
+        self.municipio = Municipio.objects.create(
+            nombre='Municipio de México', estado=self.estado)
+
         self.proveedor = Proveedor.objects.create(
             rfc='1234567890123',
             razon_social='Proveedora',
@@ -37,7 +39,6 @@ class TestFormProyecto(TestCase):
             'responsables': 'Responsable de Prueba',
             'proveedor': self.proveedor.id
         }
-
 
     def test_form_proyecto_valid(self):
         form = FormProyecto(data=self.proyecto_data)

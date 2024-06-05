@@ -1,15 +1,18 @@
 from django.test import TestCase
-from cuentas.forms import FormCuentaBancaria, FormCuentaBancariaEditar, FiltrosCuenta
+from cuentas.forms import FormCuentaBancaria
+from cuentas.forms import FormCuentaBancariaEditar, FiltrosCuenta
 from cuentas.models import CuentaBancaria
 from proyecto.models import Proyecto
 from proveedores.models import Proveedor, Estado, Municipio
+
 
 class TestFormCuentaBancaria(TestCase):
 
     def setUp(self):
         self.estado = Estado.objects.create(nombre='Estado de México')
-        self.municipio = Municipio.objects.create(nombre='Municipio de México', estado=self.estado)
-        
+        self.municipio = Municipio.objects.create(
+            nombre='Municipio de México', estado=self.estado)
+
         self.proveedor = Proveedor.objects.create(
             rfc='1234567890123',
             razon_social='Proveedora',
@@ -29,7 +32,7 @@ class TestFormCuentaBancaria(TestCase):
             responsables='Responsable de Prueba',
             proveedor=self.proveedor
         )
-        
+
         self.cuenta_bancaria_data = {
             'idcuenta': 'C001',
             'responsable': 'Responsable de Cuenta',

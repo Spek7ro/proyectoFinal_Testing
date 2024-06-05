@@ -30,7 +30,7 @@ class NuevoProveedor(LoginRequiredMixin, StaffRequiredMixin, CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_staff:
-            # Redirige 
+            # Redirige
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
@@ -130,6 +130,7 @@ def buscar_proveedor(request):
 
     context = {'form': form, 'proveedores': proveedor}
     return render(request, 'proveedores/proveedor_list.html', context)
+
 
 @login_required
 def generar_reporte(request):

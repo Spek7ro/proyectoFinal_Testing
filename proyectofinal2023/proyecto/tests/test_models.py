@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from proyecto.models import Proyecto
 from proveedores.models import Proveedor, Estado, Municipio
 
+
 class TestProyectoModels(TestCase):
     def setUp(self):
         self.proveedor = Proveedor.objects.create(
@@ -12,7 +13,9 @@ class TestProyectoModels(TestCase):
             telefono='1234567890',
             correo='test@proveedor.com',
             estado=Estado.objects.create(nombre='Estado Test'),
-            municipio=Municipio.objects.create(nombre='Municipio Test', estado=Estado.objects.create(nombre='Estado Test'))
+            municipio=Municipio.objects.create(
+                nombre='Municipio Test',
+                estado=Estado.objects.create(nombre='Estado Test'))
         )
 
     def test_crear_proyecto(self):
@@ -70,7 +73,7 @@ class TestProyectoModels(TestCase):
             nombre_proyecto='Proyecto de Prueba 4',
             objetivo='Objetivo de Prueba 4',
             presupuesto='300000',
-            duracion='doce',  
+            duracion='doce',
             responsables='Responsable de Prueba 4',
             proveedor=self.proveedor
         )
@@ -82,7 +85,7 @@ class TestProyectoModels(TestCase):
             num_proyecto='PROY005',
             nombre_proyecto='Proyecto de Prueba 5',
             objetivo='Objetivo de Prueba 5',
-            presupuesto='1000000000000000',  
+            presupuesto='1000000000000000',
             duracion='12',
             responsables='Responsable de Prueba 5',
             proveedor=self.proveedor
@@ -90,13 +93,11 @@ class TestProyectoModels(TestCase):
         with self.assertRaises(ValidationError):
             proyecto.full_clean()
 
-
-
     def test_longitud_maxima_campos(self):
         proyecto = Proyecto(
             num_proyecto='PROY007',
-            nombre_proyecto='X' * 256,  
-            objetivo='X' * 1000,  
+            nombre_proyecto='X' * 256,
+            objetivo='X' * 1000,
             presupuesto='700000',
             duracion='12',
             responsables='X' * 201,
@@ -117,8 +118,8 @@ class TestProyectoModels(TestCase):
             proveedor=self.proveedor
         )
         proyecto.save()  # Guardamos el proyecto
-        self.assertEqual(proyecto.proveedor, self.proveedor) 
-        
+        self.assertEqual(proyecto.proveedor, self.proveedor)
+
     def test_str_metodos(self):
         proyecto = Proyecto.objects.create(
             num_proyecto='PROY111',

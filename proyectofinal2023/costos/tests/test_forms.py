@@ -4,12 +4,14 @@ from costos.models import Costo
 from proyecto.models import Proyecto
 from proveedores.models import Proveedor, Estado, Municipio
 
+
 class TestFormCosto(TestCase):
 
     def setUp(self):
         self.estado = Estado.objects.create(nombre='Estado de México')
-        self.municipio = Municipio.objects.create(nombre='Municipio de México', estado=self.estado)
-        
+        self.municipio = Municipio.objects.create(
+            nombre='Municipio de México', estado=self.estado)
+
         self.proveedor = Proveedor.objects.create(
             rfc='1234567890123',
             razon_social='Proveedora',
@@ -29,7 +31,7 @@ class TestFormCosto(TestCase):
             responsables='Responsable de Prueba',
             proveedor=self.proveedor
         )
-        
+
         self.costo_data = {
             'descripcion': 'Descripción de Prueba',
             'costo': 5000.00,
