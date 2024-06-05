@@ -10,13 +10,13 @@ def step_impl(context):
 
 
 @given(u'luego doy clik en el boton de eliminar proyecto')
-def step_impl(context):
+def step_impl2(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="dataTable"]/tbody/tr[6]/td[9]/a[1]').click()
 
 
 @when(u'presiono el boton de confirmar eliminación del proyecto')
-def step_impl(context):
+def step_impl3(context):
     context.driver.find_element(
         By.XPATH, '//*[@id="content"]/div/div/form/button').click()
 
@@ -25,7 +25,7 @@ def step_impl(context):
     u'no puedo ver el nombre del proyecto "{nombre}" '
     u'en la lista de proyectos'
 )
-def step_impl(context, nombre):
+def step_impl4(context, nombre):
     proyectos = context.driver.find_elements(
         By.XPATH,
         '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')

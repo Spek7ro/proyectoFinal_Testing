@@ -12,8 +12,6 @@ from django.http import HttpResponse  # type: ignore
 from django.template.loader import render_to_string  # type: ignore
 from weasyprint import HTML, CSS  # type: ignore
 import datetime
-from django.db.models import Q
-from django.shortcuts import render
 
 
 class ListaProyectos(LoginRequiredMixin, ListView):

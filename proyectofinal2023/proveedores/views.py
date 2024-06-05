@@ -4,6 +4,7 @@ from django.urls import reverse_lazy  # type: ignore
 from django.views.generic import ListView, TemplateView  # type: ignore
 from django.views.generic.edit import CreateView, DeleteView  # type: ignore
 from django.views.generic.edit import UpdateView  # type: ignore
+from sympy import Q  # type: ignore
 from .models import Proveedor, Municipio
 from .forms import FormProveedor, FormProveedorEditar, FiltrosProveedor
 from django.http import JsonResponse  # type: ignore
@@ -13,8 +14,7 @@ from django.http import HttpResponse  # type: ignore
 from django.template.loader import render_to_string  # type: ignore
 from weasyprint import HTML, CSS  # type: ignore
 import datetime
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required  # type: ignore
 
 
 class ListaProveedores(LoginRequiredMixin, ListView):

@@ -1,6 +1,5 @@
 from behave import given
 from selenium.webdriver.common.by import By
-import time
 
 
 @given(u'le doy clik en el enlace proyectos')
