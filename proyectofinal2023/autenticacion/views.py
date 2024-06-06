@@ -61,8 +61,8 @@ def error404(request):
 
 
 def loguear(request):
+    form = AuthenticationForm(request, data=request.POST)
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             nombre_usuario = form.cleaned_data.get("username")
             contraseña = form.cleaned_data.get("password")
