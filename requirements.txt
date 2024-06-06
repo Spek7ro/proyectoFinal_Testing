@@ -7,4 +7,5 @@ django-bootstrap4==23.1
 crispy-bootstrap4==2022.1
 weasyprint==59.0
 django-weasyprint==2.2.0
+coverage==5.0
 sympy

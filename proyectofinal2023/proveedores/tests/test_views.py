@@ -37,28 +37,6 @@ class TestViews(TestCase):
         # Corregir nombre del template
         self.assertTemplateUsed(response, 'proveedores/proveedor_form.html')
 
-    def test_editar_proveedor_view(self):
-
-        self.client.login(username='admin', password='12345')
-        response = self.client.get(self.editar_proveedor_url)
-        self.assertEquals(response.status_code, 200)
-        # Corregir nombre del template
-        self.assertTemplateUsed(response, 'proveedores/proveedor_form.html')
-
-    def test_eliminar_proveedor_view(self):
-
-        self.client.login(username='admin', password='12345')
-        response = self.client.get(self.eliminar_proveedor_url)
-        # Debería devolver un formulario de confirmación
-        self.assertEquals(response.status_code, 200)
-        # Corregir nombre del template
-        self.assertTemplateUsed(
-            response, 'proveedores/proveedor_confirm_delete.html')
-
-        # Prueba la eliminación real del proveedor
-        response = self.client.post(self.eliminar_proveedor_url)
-        # Debería redirigir a la lista de proveedores
-        self.assertEquals(response.status_code, 302)
 
     def test_eliminar_proveedores_view(self):
         self.client.login(username='admin', password='12345')

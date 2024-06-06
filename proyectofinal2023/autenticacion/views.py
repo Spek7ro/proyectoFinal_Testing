@@ -10,11 +10,6 @@ from django.contrib.auth.models import User, Group  # type: ignore
 from django.db.models.signals import post_save  # type: ignore
 
 
-def add_user_to_group(sender, instance, created, **kwargs):
-    if created:
-        group, created = Group.objects.get(name='Investigadores')
-        instance.groups.add(group)
-    post_save.connect(add_user_to_group, sender=User)
 
 
 class VRegistro(View):
@@ -71,28 +66,23 @@ def loguear(request):
         if form.is_valid():
             nombre_usuario = form.cleaned_data.get("username")
             contraseña = form.cleaned_data.get("password")
-            usuario = authenticate(
-                username=nombre_usuario, password=contraseña)
+            usuario = authenticate(username=nombre_usuario, password=contraseña)
             if usuario is not None:
                 login(request, usuario)
                 return redirect('home')
             else:
-                # No muestra los mensajes
                 messages.error(request, "Usuario no válido")
+        else:
+            messages.error(request, "Información incorrecta")
     else:
-        messages.error(request, "Información incorrecta")
-    form = AuthenticationForm()
-    # Agregar placeholder al campo de nombre de usuario
-    form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'
-    # Agregar placeholder al campo de contraseña
-    form.fields['password'].widget.attrs['placeholder'] = 'Contraseña'
+        form = AuthenticationForm()
 
-    # Agregar clase al campo de nombre de usuario
-    form.fields['username'].widget.attrs['class'] = \
-        'form-control form-control-user'
-    # Agregar clase al campo de contraseña
-    form.fields['password'].widget.attrs['class'] = \
-        'form-control form-control-user'
+    # Agregar placeholder y clase a los campos del formulario
+    form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'
+    form.fields['password'].widget.attrs['placeholder'] = 'Contraseña'
+    form.fields['username'].widget.attrs['class'] = 'form-control form-control-user'
+    form.fields['password'].widget.attrs['class'] = 'form-control form-control-user'
+
     return render(request, "login/login.html", {'form': form})
 
 
