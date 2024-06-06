@@ -2,17 +2,10 @@ from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.contrib.auth.models import User
 from unittest.mock import patch
-from ..views import NuevoProyecto, EliminarProyecto, EditarProyecto, generar_reporte
 from ..models import Proyecto
 from proveedores.models import Proveedor, Estado, Municipio
 from django.test import Client
-from django.http import HttpRequest
-from django.core.files.uploadedfile import SimpleUploadedFile
-import datetime
-from django.test import TestCase, RequestFactory
-from django.conf import settings
-from django.http import HttpResponse
-from django.template.loader import render_to_string
+
 
 class ProyectoViewsTestCase(TestCase):
     def setUp(self):
@@ -20,7 +13,7 @@ class ProyectoViewsTestCase(TestCase):
         self.user = User.objects.create_user(
             username='testuser', password='12345')
         self.client = Client()
-         # Crear instancias de Estado
+        # Crear instancias de Estado
         estado = Estado.objects.create(nombre="Estado de Ejemplo")
 
         municipio = Municipio.objects.create(
@@ -93,7 +86,3 @@ class ProyectoViewsTestCase(TestCase):
         response = self.client.get(reverse('lista_proyectos'), data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'proyecto/proyecto_list.html')
-
-    
-
-

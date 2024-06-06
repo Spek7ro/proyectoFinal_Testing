@@ -6,10 +6,7 @@ from django.contrib import messages  # type: ignore
 from django.contrib.auth.forms import AuthenticationForm  # type: ignore
 from .forms import RegistroForm, ReestablecerContraseñaForm
 
-from django.contrib.auth.models import User, Group  # type: ignore
-from django.db.models.signals import post_save  # type: ignore
-
-
+from django.contrib.auth.models import User  # type: ignore
 
 
 class VRegistro(View):
@@ -66,7 +63,8 @@ def loguear(request):
         if form.is_valid():
             nombre_usuario = form.cleaned_data.get("username")
             contraseña = form.cleaned_data.get("password")
-            usuario = authenticate(username=nombre_usuario, password=contraseña)
+            usuario = authenticate(
+                username=nombre_usuario, password=contraseña)
             if usuario is not None:
                 login(request, usuario)
                 return redirect('home')
@@ -74,7 +72,6 @@ def loguear(request):
                 messages.error(request, "Usuario no válido")
         else:
             messages.error(request, "Información incorrecta")
-
 
     # Agregar placeholder y clase a los campos del formulario
     form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'

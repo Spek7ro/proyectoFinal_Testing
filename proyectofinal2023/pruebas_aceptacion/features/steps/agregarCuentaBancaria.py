@@ -40,7 +40,7 @@ def step_impl(context):
     u'puedo ver el id de la cuenta "{id_cuenta}" en la lista de cuentas bancarias')
 def step_impl7(context, id_cuenta):
     cuentas = context.driver.find_elements(
-        By.XPATH,'//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
+        By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
     for cuenta in cuentas:
         if cuenta.find_element(By.XPATH, 'td[1]').text == id:
             assert True, f"El id {

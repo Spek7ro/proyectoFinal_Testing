@@ -37,7 +37,6 @@ class TestViews(TestCase):
         # Corregir nombre del template
         self.assertTemplateUsed(response, 'proveedores/proveedor_form.html')
 
-
     def test_eliminar_proveedores_view(self):
         self.client.login(username='admin', password='12345')
         response = self.client.post(

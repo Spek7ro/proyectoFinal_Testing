@@ -10,5 +10,6 @@ def step_impl(context):
 
 @given(u'luego clik en el boton de lista de costos')
 def step_impl(context):
-    context.driver.find_element(By.XPATH, '//*[@id="collapseUtilities3"]/div/a[1]').click()
+    context.driver.find_element(
+        By.XPATH, '//*[@id="collapseUtilities3"]/div/a[1]').click()
     time.sleep(3)

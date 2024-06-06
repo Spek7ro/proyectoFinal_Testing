@@ -49,7 +49,9 @@ def step_impl(context, proveedor):
 @then(
     u'puedo ver el nombre del proyecto "{nombre_proyecto}" en la lista de proyectos')
 def step_impl9(context, nombre_proyecto):
-    proyectos = context.driver.find_elements(By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
+    proyectos = context.driver.find_elements(
+        By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
     for proyecto in proyectos:
         if proyecto.find_element(By.XPATH, 'td[1]').text == nombre_proyecto:
-            assert True, f"El nombre {nombre_proyecto} no se encuentra en la lista de proyectos"
+            assert True, f"El nombre {
+                nombre_proyecto} no se encuentra en la lista de proyectos"

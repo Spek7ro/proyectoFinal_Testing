@@ -23,8 +23,10 @@ def step_impl(context):
 
 @then(u'no puedo ver el nombre el id "{id_cuenta}" en la lista de cuentas')
 def step_impl(context, id_cuenta):
-    cuentas = context.driver.find_elements(By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
+    cuentas = context.driver.find_elements(
+        By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
     for cuenta in cuentas:
         if cuenta.find_element(By.XPATH, 'td[1]').text == id_cuenta:
-            assert False, f"La cuenta con id {id_cuenta} se encuentra en la lista de cuentas"
+            assert False, f"La cuenta con id {
+                id_cuenta} se encuentra en la lista de cuentas"
     time.sleep(3)

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from django.contrib.messages import get_messages
 
+
 class ViewTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -15,9 +16,10 @@ class ViewTests(TestCase):
             last_name='User'
         )
         self.login_url = reverse('iniciar_sesion')
-        
+
     def test_user_added_to_investigadores_group(self):
-        user = User.objects.create_user(username='pruebaGrupo', password='grupo123')
+        user = User.objects.create_user(
+            username='pruebaGrupo', password='grupo123')
 
         investigadores_group = Group.objects.get(name='Investigadores')
         self.assertIn(investigadores_group, user.groups.all())
@@ -63,7 +65,7 @@ class ViewTests(TestCase):
         response = self.client.get(reverse('error_404'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, '404.html')
-        
+
     def test_invalid_user_shows_error_message(self):
         response = self.client.post(self.login_url, {
             'username': 'testuser',
@@ -81,12 +83,12 @@ class ViewTests(TestCase):
             'username': '',  # Campo vacío
             'password': ''
         })
-        
+
         # Verificar que la respuesta contiene el mensaje de error
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), "Información incorrecta")
-        
+
     def test_loguear_post_valid(self):
         form_data = {
             'username': 'testuser',

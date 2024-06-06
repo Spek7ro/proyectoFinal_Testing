@@ -28,7 +28,7 @@ def step_impl(context, proyecto):
     u'puedo ver la descripcion del costo "{descripcion}" en la lista de costos')
 def step_impl5(context, descripcion):
     costos = context.driver.find_elements(
-        By.XPATH,'//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
+        By.XPATH, '//*[@id="content"]/div/div/div/div[2]/div/div[1]/table/tbody/tr')
     for costo in costos:
         if costo.find_element(By.XPATH, 'td[1]').text == descripcion:
             assert True, f"El descripcion {

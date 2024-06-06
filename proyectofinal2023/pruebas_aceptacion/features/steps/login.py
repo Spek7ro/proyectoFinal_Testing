@@ -18,7 +18,8 @@ def step_impl(context, usuario, password):
 
 @when(u'presiono el botón de Ingresar')
 def step_impl(context):
-    context.driver.find_element(By.XPATH,'/html/body/div/div/div/div/div/div/div[2]/div/form/button').click()
+    context.driver.find_element(
+        By.XPATH, '/html/body/div/div/div/div/div/div/div[2]/div/form/button').click()
 
 
 @then(u'puedo ver en el banner mi nombre de usuario "{username}"')

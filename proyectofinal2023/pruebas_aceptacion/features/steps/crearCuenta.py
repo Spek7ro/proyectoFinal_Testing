@@ -36,5 +36,6 @@ def step_impl(context, password_confirm):
 
 @when(u'presiono el botón de Registar')
 def step_impl7(context):
-    context.driver.find_element(By.XPATH, '/html/body/div/div/div/div/div[2]/div/form/button').click()
+    context.driver.find_element(
+        By.XPATH, '/html/body/div/div/div/div/div[2]/div/form/button').click()
     time.sleep(2)
