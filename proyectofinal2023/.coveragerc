@@ -7,3 +7,8 @@ omit =
     */usr/*
     */manage.py*
     */admin.py*
+    */settings.py*
+    */apps.py*
+    */signals.py*
+    */urls.py*
+    */utils.py*

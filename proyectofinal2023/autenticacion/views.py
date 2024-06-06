@@ -74,8 +74,7 @@ def loguear(request):
                 messages.error(request, "Usuario no válido")
         else:
             messages.error(request, "Información incorrecta")
-    else:
-        form = AuthenticationForm()
+
 
     # Agregar placeholder y clase a los campos del formulario
     form.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'

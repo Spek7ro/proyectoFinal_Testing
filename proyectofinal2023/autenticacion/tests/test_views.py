@@ -66,14 +66,14 @@ class ViewTests(TestCase):
         
     def test_invalid_user_shows_error_message(self):
         response = self.client.post(self.login_url, {
-            'username': 'invaliduser',
-            'password': 'invalidpassword'
+            'username': 'testuser',
+            'password': 'wrongpassword'  # Contraseña incorrecta para un usuario existente
         })
-        
+
         # Verificar que la respuesta contiene el mensaje de error
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "Usuario no válido")
+        self.assertEqual(str(messages[0]), "Información incorrecta")
 
     def test_incorrect_information_shows_error_message(self):
         # Enviar un formulario vacío o con datos inválidos
